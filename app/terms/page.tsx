@@ -12,9 +12,9 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-// NOTE(shahzar): placeholders marked [REGISTERED …] and the governing-law
-// clause must be confirmed with your solicitor before launch. The commercial
-// terms below mirror what the site actually promises.
+// NOTE(shahzar): the governing-law clause must be confirmed with your solicitor
+// before launch. The commercial terms below mirror what the site actually
+// promises.
 const COMPANY = 'Raynaters Tech Inc.';
 const EMAIL = 'team@raynaters.tech';
 
@@ -33,8 +33,7 @@ const sections: readonly LegalSection[] = [
       {
         type: 'dl',
         items: [
-          { term: 'Entity', def: `${COMPANY} — [REGISTERED COMPANY NUMBER / ABN]` },
-          { term: 'Registered address', def: '[REGISTERED BUSINESS ADDRESS]' },
+          { term: 'Entity', def: COMPANY },
           { term: 'Contact', def: EMAIL },
         ],
       },

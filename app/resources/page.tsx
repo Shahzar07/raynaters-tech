@@ -41,7 +41,7 @@ export default function ResourcesPage() {
               <Eyebrow>Resources</Eyebrow>
             </Reveal>
             <Reveal delay={0.05}>
-              <h1 className="mt-5 text-balance font-extrabold uppercase text-[34px] leading-[1.06] tracking-tightest text-text-primary sm:text-[50px] md:text-[62px] md:leading-[1.02]">
+              <h1 className="mt-5 text-balance font-extrabold uppercase text-[37px] leading-[1.06] tracking-tightest text-text-primary min-[400px]:text-[44px] sm:text-[50px] md:text-[62px] md:leading-[1.02]">
                 Plain-English guides to automating your business.
               </h1>
             </Reveal>

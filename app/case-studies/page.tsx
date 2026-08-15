@@ -39,7 +39,7 @@ export default function CaseStudiesPage() {
               <Eyebrow>Case studies</Eyebrow>
             </Reveal>
             <Reveal delay={0.05}>
-              <h1 className="mt-5 font-extrabold uppercase text-balance text-[34px] leading-[1.06] tracking-tightest text-text-primary sm:text-[50px] md:text-[62px] md:leading-[1.02]">
+              <h1 className="mt-5 font-extrabold uppercase text-balance text-[37px] leading-[1.06] tracking-tightest text-text-primary min-[400px]:text-[44px] sm:text-[50px] md:text-[62px] md:leading-[1.02]">
                 Real UK deployments. Real recovered revenue.
               </h1>
             </Reveal>

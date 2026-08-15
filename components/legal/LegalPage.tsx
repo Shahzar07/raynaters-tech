@@ -47,7 +47,7 @@ export function LegalPage({
           <p className="inline-block bg-ink px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.14em] text-text-on-ink">
             Legal
           </p>
-          <h1 className="mt-5 text-[30px] font-extrabold uppercase leading-[1.1] tracking-[-0.045em] text-text-primary sm:text-[42px] md:text-[52px]">
+          <h1 className="mt-5 text-[36px] font-extrabold uppercase leading-[1.1] tracking-[-0.045em] text-text-primary min-[400px]:text-[40px] sm:text-[42px] md:text-[52px]">
             {title}
           </h1>
           <p className="mt-5 max-w-[62ch] text-[16px] font-medium leading-[1.62] text-text-secondary sm:text-[18px]">

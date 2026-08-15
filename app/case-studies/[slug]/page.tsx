@@ -89,7 +89,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             </div>
           </div>
           <Reveal delay={0.05}>
-            <h1 className="mt-7 max-w-[18ch] font-extrabold uppercase text-balance text-[32px] leading-[1.08] tracking-tightest text-text-primary sm:text-[44px] md:text-[56px] md:leading-[1.03]">
+            <h1 className="mt-7 max-w-[18ch] font-extrabold uppercase text-balance text-[37px] leading-[1.08] tracking-tightest text-text-primary min-[400px]:text-[41px] sm:text-[44px] md:text-[56px] md:leading-[1.03]">
               {study.headlineResult}
             </h1>
           </Reveal>

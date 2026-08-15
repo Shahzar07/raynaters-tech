@@ -74,7 +74,7 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
           <div className="mt-8">
             <Eyebrow>{resource.category}</Eyebrow>
             <Reveal delay={0.05}>
-              <h1 className="mt-5 font-extrabold uppercase text-balance text-[32px] leading-[1.08] tracking-tightest text-text-primary sm:text-[44px] md:text-[52px] md:leading-[1.04]">
+              <h1 className="mt-5 font-extrabold uppercase text-balance text-[37px] leading-[1.08] tracking-tightest text-text-primary min-[400px]:text-[41px] sm:text-[44px] md:text-[52px] md:leading-[1.04]">
                 {resource.title}
               </h1>
             </Reveal>

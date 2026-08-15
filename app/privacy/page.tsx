@@ -12,9 +12,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-// NOTE(shahzar): the placeholders marked [REGISTERED …] must be replaced with
-// the real entity details before this is relied on. Everything else reflects
-// how the site and funnel actually operate today.
+// NOTE(shahzar): this reflects how the site and funnel actually operate today.
 const COMPANY = 'Raynaters Tech Inc.';
 const EMAIL = 'team@raynaters.tech';
 
@@ -33,8 +31,7 @@ const sections: readonly LegalSection[] = [
       {
         type: 'dl',
         items: [
-          { term: 'Entity', def: `${COMPANY} — [REGISTERED COMPANY NUMBER / ABN]` },
-          { term: 'Registered address', def: '[REGISTERED BUSINESS ADDRESS]' },
+          { term: 'Entity', def: COMPANY },
           { term: 'Privacy contact', def: EMAIL },
         ],
       },
