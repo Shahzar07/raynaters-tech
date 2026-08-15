@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import { Container } from '@/components/ui/Container';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Reveal } from '@/components/ui/Reveal';
@@ -16,9 +16,9 @@ export function MiniCaseStory({ data }: { data: MiniCaseStoryData }) {
         <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12">
           {/* Metric panel */}
           <Reveal className="md:col-span-5">
-            <div className="flex h-full flex-col justify-between rounded-[18px] border border-border bg-surface p-7 sm:p-8">
+            <div className="flex h-full flex-col justify-between rounded-none border border-border bg-surface p-7 sm:p-8">
               <div className="flex items-center gap-3">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[10px] border border-border bg-surface-hover text-[14px] font-medium tracking-[-0.01em] text-text-primary">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-none border border-border bg-surface-hover text-[14px] font-medium tracking-[-0.01em] text-text-primary">
                   {data.monogram}
                 </span>
                 <span className="text-[14px] font-medium tracking-[-0.01em] text-text-primary">
@@ -26,7 +26,7 @@ export function MiniCaseStory({ data }: { data: MiniCaseStoryData }) {
                 </span>
               </div>
               <div className="mt-10">
-                <p className="font-display text-[56px] leading-none tracking-[-0.04em] text-accent sm:text-[64px]">
+                <p className="font-extrabold uppercase text-[56px] leading-none tracking-[-0.04em] text-signal sm:text-[64px]">
                   {data.metric}
                 </p>
                 <p className="mt-3 text-[14px] uppercase tracking-[0.16em] text-text-muted">
@@ -46,7 +46,7 @@ export function MiniCaseStory({ data }: { data: MiniCaseStoryData }) {
                 </p>
               </div>
               <div className="mt-6">
-                <p className="text-[12px] uppercase tracking-[0.18em] text-accent">The outcome</p>
+                <p className="text-[12px] uppercase tracking-[0.18em] text-signal">The outcome</p>
                 <p className="mt-2 text-pretty text-[16px] leading-relaxed text-text-primary sm:text-[17px]">
                   {data.outcome}
                 </p>
@@ -57,7 +57,7 @@ export function MiniCaseStory({ data }: { data: MiniCaseStoryData }) {
               <div className="mt-7">
                 <Link
                   href="/case-studies"
-                  className="inline-flex items-center gap-1.5 text-[14px] font-medium text-accent transition-colors hover:text-accent-hover"
+                  className="inline-flex items-center gap-1.5 text-[14px] font-medium text-signal transition-colors hover:text-signal"
                 >
                   Read the full case studies
                   <ArrowRight className="h-4 w-4" strokeWidth={2.25} />

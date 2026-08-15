@@ -1,7 +1,7 @@
-import { Container, Section } from '@/components/ui/Container';
+﻿import { Container, Section } from '@/components/ui/Container';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Reveal } from '@/components/ui/Reveal';
-import { MediaFrame } from '@/components/ui/MediaFrame';
+import { ShowcaseVisual } from '@/components/landing/ShowcaseVisual';
 import type { ShowcaseRow } from '@/lib/landing-pages/types';
 
 interface FeatureShowcaseProps {
@@ -28,21 +28,15 @@ export function FeatureShowcase({ eyebrow, rows }: FeatureShowcaseProps) {
               >
                 {/* Copy */}
                 <div className="max-w-[480px]">
-                  <p className="font-display text-[22px] leading-[1.18] tracking-[-0.02em] text-text-primary sm:text-[26px] md:text-[28px]">
+                  <p className="font-extrabold uppercase text-[22px] leading-[1.18] tracking-[-0.02em] text-text-primary sm:text-[26px] md:text-[28px]">
                     {row.title}
                   </p>
                   <p className="mt-4 text-pretty text-[16px] leading-relaxed text-text-secondary sm:text-[17px]">
                     {row.body}
                   </p>
                 </div>
-                {/* Image */}
-                <MediaFrame
-                  src={row.image.src}
-                  alt={row.image.alt}
-                  aspectClass="aspect-[4/3]"
-                  glow
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
+                {/* Data panel */}
+                <ShowcaseVisual data={row.visual} />
               </div>
             </Reveal>
           ))}

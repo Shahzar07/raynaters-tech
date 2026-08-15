@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
@@ -58,12 +58,12 @@ export function NavDropdown({
       </button>
       {open && (
         <div className="absolute left-1/2 top-full -translate-x-1/2 pt-3">
-          <div className="w-[320px] rounded-[14px] border border-border bg-surface p-2 shadow-2xl shadow-black/50">
+          <div className="w-[320px] rounded-none border border-border bg-surface p-2 shadow-2xl shadow-black/50">
             {items.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="block rounded-[10px] px-3 py-2.5 transition-colors hover:bg-surface-hover"
+                className="block rounded-none px-3 py-2.5 transition-colors hover:bg-surface-hover"
               >
                 <span className="block text-[14px] font-medium tracking-[-0.01em] text-text-primary">
                   {item.label}

@@ -15,7 +15,7 @@ import { RESOURCES } from '@/lib/resources';
 export const metadata: Metadata = pageMetadata({
   title: 'Resources | Raynaters Tech',
   description:
-    'Honest, practical guides on AI automation and AI receptionists for UK businesses — pricing, what to automate first, and how to get a return.',
+    'Honest, practical guides on AI automation and AI receptionists for UK businesses — what to automate first, what actually works, and how to get a return.',
   path: '/resources',
 });
 
@@ -24,7 +24,7 @@ export default function ResourcesPage() {
   const rest = RESOURCES.filter((r) => !r.featured);
 
   return (
-    <main className="relative grain min-h-screen overflow-x-hidden">
+    <main className="relative min-h-screen overflow-x-hidden">
       <JsonLd
         data={breadcrumbSchema([
           { name: 'Home', path: '/' },
@@ -33,49 +33,85 @@ export default function ResourcesPage() {
       />
       <Navigation />
 
-      <section className="relative overflow-hidden border-b border-border pt-10 pb-14 sm:pt-12 sm:pb-20">
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-          <div
-            className="absolute left-1/2 top-[-25%] h-[520px] w-[1000px] -translate-x-1/2 rounded-full"
-            style={{ background: 'radial-gradient(closest-side, rgba(211,251,163,0.12), transparent 72%)' }}
-          />
-        </div>
+      <section className="relative overflow-hidden border-b-2 border-border pb-14 pt-10 sm:pb-20 sm:pt-12">
         <Container>
           <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Resources', path: '/resources' }]} />
-          <div className="mt-8 max-w-[760px]">
+          <div className="mt-8 max-w-[860px]">
             <Reveal>
               <Eyebrow>Resources</Eyebrow>
             </Reveal>
             <Reveal delay={0.05}>
-              <h1 className="mt-5 font-display text-balance text-[34px] leading-[1.06] tracking-tightest text-text-primary sm:text-[50px] md:text-[62px] md:leading-[1.02]">
+              <h1 className="mt-5 text-balance font-extrabold uppercase text-[34px] leading-[1.06] tracking-tightest text-text-primary sm:text-[50px] md:text-[62px] md:leading-[1.02]">
                 Plain-English guides to automating your business.
               </h1>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="mt-6 max-w-[58ch] text-pretty text-[17px] leading-relaxed text-text-secondary sm:text-[19px]">
-                No hype, no jargon — just practical answers on what AI automation costs, what
-                to automate first, and how to make sure it pays for itself.
+              <p className="mt-6 max-w-[58ch] text-pretty text-[17px] font-medium leading-relaxed text-text-secondary sm:text-[19px]">
+                No hype, no jargon — just practical answers on what to automate first, what
+                actually works, and how to make sure it pays for itself.
               </p>
             </Reveal>
           </div>
+
+          {/* Index strip — tells you the shape of the library at a glance. */}
+          <Reveal delay={0.15}>
+            <dl className="mt-12 grid max-w-[620px] grid-cols-2 border-2 border-ink sm:grid-cols-3">
+              <div className="px-5 py-4">
+                <dt className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-text-muted">
+                  Guides
+                </dt>
+                <dd className="mt-1.5 text-[24px] font-extrabold leading-none tracking-[-0.04em] text-text-primary">
+                  {RESOURCES.length}
+                </dd>
+              </div>
+              <div className="border-l-2 border-ink px-5 py-4">
+                <dt className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-text-muted">
+                  Cost to read
+                </dt>
+                <dd className="mt-1.5 text-[24px] font-extrabold leading-none tracking-[-0.04em] text-text-primary">
+                  Free
+                </dd>
+              </div>
+              <div className="col-span-2 border-t-2 border-ink px-5 py-4 sm:col-span-1 sm:border-l-2 sm:border-t-0">
+                <dt className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-text-muted">
+                  Sign-up wall
+                </dt>
+                <dd className="mt-1.5 text-[24px] font-extrabold leading-none tracking-[-0.04em] text-text-primary">
+                  None
+                </dd>
+              </div>
+            </dl>
+          </Reveal>
         </Container>
       </section>
 
-      <section className="border-b border-border py-14 sm:py-20 md:py-24">
+      <section className="border-b-2 border-border bg-bg-alt py-14 sm:py-20 md:py-24">
         <Container>
           {featured && (
             <Reveal className="block">
               <ResourceCard resource={featured} featured />
             </Reveal>
           )}
+
           {rest.length > 0 && (
-            <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
-              {rest.map((r, i) => (
-                <Reveal key={r.slug} delay={Math.min(i * 0.05, 0.3)} className="h-full">
-                  <ResourceCard resource={r} />
-                </Reveal>
-              ))}
-            </div>
+            <>
+              <Reveal delay={0.06}>
+                <div className="mt-14 flex items-center gap-4">
+                  <h2 className="shrink-0 text-[13px] font-extrabold uppercase tracking-[0.16em] text-text-muted">
+                    More guides
+                  </h2>
+                  <span aria-hidden className="h-[2px] flex-1 bg-border" />
+                </div>
+              </Reveal>
+
+              <div className="mt-7 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+                {rest.map((r, i) => (
+                  <Reveal key={r.slug} delay={Math.min(i * 0.05, 0.3)} className="h-full">
+                    <ResourceCard resource={r} />
+                  </Reveal>
+                ))}
+              </div>
+            </>
           )}
         </Container>
       </section>

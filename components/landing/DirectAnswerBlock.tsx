@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { Reveal } from '@/components/ui/Reveal';
@@ -19,8 +19,8 @@ export function DirectAnswerBlock({
     <div className="py-12 sm:py-16">
       <Container>
         <Reveal>
-          <div className="mx-auto max-w-[860px] rounded-[18px] border border-accent/30 bg-accent/[0.05] p-6 sm:p-8 md:p-10">
-            <p className="text-[11px] uppercase tracking-[0.22em] text-accent">
+          <div className="mx-auto max-w-[860px] rounded-none border border-ink bg-accent/30 p-6 sm:p-8 md:p-10">
+            <p className="text-[11px] uppercase tracking-[0.22em] text-signal">
               The short answer
             </p>
             <p className="mt-3 text-pretty text-[19px] leading-[1.5] text-text-primary sm:text-[23px] sm:leading-[1.45]">
@@ -29,7 +29,7 @@ export function DirectAnswerBlock({
             {link && (
               <Link
                 href={link.href}
-                className="mt-5 inline-flex items-center gap-1.5 text-[14px] font-medium text-accent transition-colors hover:text-accent-hover"
+                className="mt-5 inline-flex items-center gap-1.5 text-[14px] font-medium text-signal transition-colors hover:text-signal"
               >
                 {link.label}
                 <ArrowRight className="h-4 w-4" strokeWidth={2.25} />

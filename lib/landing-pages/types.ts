@@ -31,7 +31,7 @@ export interface ComparisonTable {
   rows: ComparisonRow[];
 }
 
-export interface PricingROI {
+export interface PaybackROI {
   headline: string;
   body: string;
   bullets: string[];
@@ -54,10 +54,31 @@ export interface ExtraSectionGroup {
   items: { title: string; body: string }[];
 }
 
+/**
+ * Showcase rows render a real, data-driven panel rather than a stock
+ * screenshot — the numbers below are what actually gets drawn.
+ */
+export type ShowcaseVisual =
+  | {
+      kind: 'pipeline';
+      label: string;
+      stages: { label: string; value: number; unit?: string }[];
+      footnote: string;
+    }
+  | {
+      kind: 'roi';
+      label: string;
+      metrics: { label: string; value: string }[];
+      seriesLabel: string;
+      trend: string;
+      series: { label: string; value: number }[];
+      footnote: string;
+    };
+
 export interface ShowcaseRow {
   title: string;
   body: string;
-  image: { src: string; alt: string };
+  visual: ShowcaseVisual;
 }
 
 export interface LandingPage {
@@ -95,7 +116,7 @@ export interface LandingPage {
   whoItsFor: string[];
   howItWorks: HowStep[];
   comparison: ComparisonTable;
-  pricingROI: PricingROI;
+  paybackROI: PaybackROI;
   miniCase: MiniCaseStory;
   faqs: FAQ[];
 

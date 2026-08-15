@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -26,13 +26,13 @@ export default function LiveAvatar() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="mb-4 w-[calc(100vw-48px)] sm:w-[420px] overflow-hidden rounded-2xl border border-border bg-surface/95 backdrop-blur-xl shadow-2xl"
+            className="mb-4 w-[calc(100vw-48px)] sm:w-[420px] overflow-hidden rounded-none border border-border bg-surface/95 backdrop-blur-xl shadow-2xl"
           >
             {/* Header */}
             <div className="flex items-center justify-between border-b border-border p-4">
               <div className="flex items-center gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent/20">
-                  <Bot className="h-4 w-4 text-accent" />
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent/30">
+                  <Bot className="h-4 w-4 text-signal" />
                 </div>
                 <div>
                   <h3 className="text-sm font-medium text-text-primary">Raynaters AI Helper</h3>
@@ -44,7 +44,7 @@ export default function LiveAvatar() {
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="rounded-lg p-2 text-text-muted transition-colors hover:bg-surface-hover hover:text-text-primary"
+                className="rounded-none p-2 text-text-muted transition-colors hover:bg-surface-hover hover:text-text-primary"
                 aria-label="Close AI Helper"
               >
                 <X className="h-4 w-4" />
@@ -76,7 +76,7 @@ export default function LiveAvatar() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-accent text-bg shadow-lg shadow-accent/20"
+        className="group relative flex h-14 w-14 items-center justify-center rounded-full border-2 border-ink bg-accent text-ink shadow-lg"
         aria-label={isOpen ? "Close AI Helper" : "Open AI Helper"}
       >
         <AnimatePresence mode="wait">
@@ -101,7 +101,7 @@ export default function LiveAvatar() {
             >
               <MessageSquare className="h-6 w-6 fill-current" />
               {/* Pulse effect */}
-              <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-accent/40 duration-1000" />
+              <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-accent/30 duration-1000" />
             </motion.div>
           )}
         </AnimatePresence>

@@ -1,4 +1,4 @@
-import { Container } from '@/components/ui/Container';
+﻿import { Container } from '@/components/ui/Container';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Reveal } from '@/components/ui/Reveal';
 import { Check } from 'lucide-react';
@@ -19,7 +19,7 @@ export function WhoItsFor({
               <Eyebrow>Who it&apos;s for</Eyebrow>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="mt-5 font-display text-balance text-[28px] leading-[1.1] tracking-[-0.03em] text-text-primary sm:text-[38px] md:text-[46px]">
+              <h2 className="mt-5 font-extrabold uppercase text-balance text-[28px] leading-[1.1] tracking-[-0.03em] text-text-primary sm:text-[38px] md:text-[46px]">
                 {heading}
               </h2>
             </Reveal>
@@ -32,9 +32,9 @@ export function WhoItsFor({
                   <div className="flex items-start gap-4">
                     <span
                       aria-hidden
-                      className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full border border-accent/40 bg-accent/10"
+                      className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full border border-ink bg-accent/30"
                     >
-                      <Check className="h-3.5 w-3.5 text-accent" strokeWidth={2.5} />
+                      <Check className="h-3.5 w-3.5 text-signal" strokeWidth={2.5} />
                     </span>
                     <p className="text-pretty text-[16px] leading-relaxed text-text-secondary sm:text-[17px]">
                       {item}

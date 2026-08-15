@@ -1,15 +1,16 @@
-# Raynaters Tech — Agentic Forces Funnel
+# Raynaters Tech — AI Automation Funnel
 
-High-conversion B2B sales funnel for Raynaters Tech, an AI automation agency.
-Single long-scroll Next.js page with 15 sections.
+Marketing site and conversion funnel for Raynaters Tech, an AI automation agency.
+Long-scroll homepage plus vertical landing pages, case studies and resources.
 
 ## Stack
 
 - **Next.js 14** (App Router) + **TypeScript** strict mode
-- **Tailwind CSS 3** with custom token-driven config
+- **Tailwind CSS 3** with a token-driven config
 - **Framer Motion** for restrained, purposeful motion
-- **Instrument Serif** (display) + **Inter** (UI), via `next/font`
+- **Boldonse** (display) + **Plus Jakarta Sans** (UI), via `next/font`
 - **lucide-react** for icons
+- **Cal.com** embed for booking
 
 ## Run
 
@@ -22,64 +23,55 @@ Then open http://localhost:3000.
 
 ## Editing copy
 
-All copy lives in [`lib/content.ts`](lib/content.ts). Edit there — never touch JSX
-to change a word.
-
-## Editing design tokens
-
-Colors, motion timings, and typography rules live in
-[`lib/design-tokens.ts`](lib/design-tokens.ts) and [`tailwind.config.ts`](tailwind.config.ts).
-Keep them in sync.
+Homepage copy lives in [`lib/content.ts`](lib/content.ts). Edit there — never touch JSX
+to change a word. Inner pages keep their copy in their own `lib/` data files.
 
 ## Structure
 
 ```
 app/
-├── layout.tsx          # Fonts, metadata, viewport
-├── page.tsx            # Imports the 15 sections in order
-├── globals.css         # Base styles, scrollbar, grain, marquee mask
-└── book/page.tsx       # /book — Calendly placeholder
+├── layout.tsx                  # Fonts, metadata, analytics
+├── page.tsx                    # Homepage section order
+├── about/                      # About page
+├── book/                       # Cal.com booking page
+├── case-studies/               # Index + [slug]
+├── resources/                  # Index + [slug]
+├── [vertical]-uk/              # Six vertical landing pages
+└── sitemap.ts, robots.ts       # Generated from lib/ data
 
 components/
-├── ui/                 # Container, Button, Reveal, CountUp, Marquee, Eyebrow
-└── sections/
-    ├── 01-AnnouncementBar.tsx
-    ├── 02-Navigation.tsx
-    ├── 03-Hero.tsx
-    ├── 04-StatHero.tsx
-    ├── 05-EvolutionStory.tsx
-    ├── 06-IndustryAgnostic.tsx
-    ├── 07-DashboardWall.tsx
-    ├── 08-PersonalNote.tsx
-    ├── 09-WhyDoingThis.tsx
-    ├── 10-AuthorityNumber.tsx
-    ├── 11-Guarantee.tsx
-    ├── 12-Testimonials.tsx
-    ├── 13-FAQ.tsx
-    ├── 14-FinalCTA.tsx
-    └── 15-Footer.tsx
+├── ui/                         # Button, Container, Reveal, Marquee, Eyebrow…
+├── sections/                   # Homepage sections, in render order
+├── landing/                    # Vertical landing-page blocks
+├── case-studies/, resources/   # Cards
+└── seo/                        # JSON-LD
 
 lib/
-├── content.ts          # All copy (single source of truth)
-├── design-tokens.ts    # Color/motion tokens
-└── utils.ts            # cn() classname helper
+├── content.ts                  # Homepage copy (single source of truth)
+├── landing-pages/              # Typed vertical page data
+├── case-studies/, resources/   # Typed content collections
+├── seo/                        # Canonical URLs, schema, UTM helpers
+└── design-tokens.ts            # Colour + motion tokens
 ```
 
-## Content swap (after first build)
+## Content notes
 
-- Replace placeholder dashboard tiles with real n8n / Make exports
-- Swap the founder portrait placeholder with a real photo via `next/image`
-- Update testimonials with real anonymized client quotes
-- Wire `/book` to a real Calendly inline widget (`react-calendly`)
-- Update the `47,283` and `$2.4M+` numbers with current figures in `lib/content.ts`
+- **No prices anywhere.** The only ask on the site is the free audit call.
+  Client result figures (e.g. recovered revenue) are proof, not pricing.
+- **Video testimonials** live in `public/testimonials/`. The `name` and `role`
+  fields in `videoTestimonials` (lib/content.ts) are intentionally blank —
+  fill them in and the name plate renders automatically.
+- **Landing page showcase panels** are rendered from real data
+  (`ShowcaseVisual`), not screenshots. Edit the numbers in the page's data file.
 
-## Anti-slop guarantees baked into the design
+## Design rules baked in
 
-- One accent color (`#D3FBA3` lime, matched to the Raynaters logo), used only on CTAs, key numbers, and accent details
-- No gradients on backgrounds (one allowed: subtle hero radial glow at ~10% opacity)
-- No glassmorphism (no backdrop-blur on cards; sticky nav uses a light backdrop on scroll only)
-- No emoji icons in UI chrome — `lucide-react` only
-- Every section has a unique layout — never a repeated three-column-feature-grid
-- Numbers count up on scroll-into-view (not on mount)
-- Hero text staggers word-by-word on mount with a subtle blur-out
-- Mobile typography scales down independently (tested at 375px)
+- One accent colour (`#D3FBA3` lime), used only on CTAs, key numbers and accent details
+- Square corners and 2px borders throughout — no rounded cards, no glassmorphism
+- No gradients on backgrounds (one exception: the subtle hero glow)
+- No emoji in UI chrome — `lucide-react` only
+- Every section has a unique layout — never a repeated three-column feature grid
+- Hero headline line breaks are authored; type is sized so no line wraps
+- CTA buttons sit on a hard offset slab and carry an attention pulse
+  (both disabled under `prefers-reduced-motion`)
+- Mobile typography scales independently, tested at 375px

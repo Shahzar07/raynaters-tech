@@ -31,15 +31,15 @@ export function organizationSchema(): WithContext<Organization> {
     '@id': ORG_ID,
     name: SITE_NAME,
     url: SITE_URL,
-    logo: absUrl('/raynaters-logo.png'),
+    logo: absUrl('/raynaters-mark.png'),
     description:
-      'AI automation agency deploying AI agents for UK service businesses that pay for themselves within 90 days — or we keep building until they do.',
+      'AI automation agency building AI systems for Australian businesses that pay for themselves within 90 days — or we keep building until they do. Also active across the UK, US and EU.',
     founder: {
       '@type': 'Person',
       name: 'Shahzar',
       // TODO(shahzar): add founder LinkedIn profile URL
     },
-    areaServed: ['GB', 'US', 'EU'],
+    areaServed: ['AU', 'GB', 'US', 'EU'],
     sameAs: [
       'https://www.linkedin.com/in/raynaters-tech-inc-7830a0383/',
       'https://www.trustpilot.com/review/raynaters.tech',
@@ -49,7 +49,7 @@ export function organizationSchema(): WithContext<Organization> {
       '@type': 'ContactPoint',
       contactType: 'customer support',
       email: 'team@raynaters.tech',
-      areaServed: ['GB', 'US', 'EU'],
+      areaServed: ['AU', 'GB', 'US', 'EU'],
       availableLanguage: 'en',
     },
   };
@@ -130,7 +130,7 @@ export function articleSchema(input: {
     url: input.url,
     datePublished: input.datePublished,
     dateModified: input.dateModified ?? input.datePublished,
-    image: input.image ? absUrl(input.image) : absUrl('/raynaters-logo.png'),
+    image: input.image ? absUrl(input.image) : absUrl('/raynaters-mark.png'),
     author: orgRef,
     publisher: orgRef,
   };

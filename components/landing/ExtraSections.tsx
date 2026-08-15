@@ -1,4 +1,4 @@
-import { Container } from '@/components/ui/Container';
+﻿import { Container } from '@/components/ui/Container';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Reveal } from '@/components/ui/Reveal';
 import type { ExtraSectionGroup } from '@/lib/landing-pages/types';
@@ -19,7 +19,7 @@ export function ExtraSections({ group }: { group: ExtraSectionGroup }) {
             </Reveal>
           )}
           <Reveal delay={0.05}>
-            <h2 className="mt-5 font-display text-balance text-[28px] leading-[1.1] tracking-[-0.03em] text-text-primary sm:text-[38px] md:text-[46px]">
+            <h2 className="mt-5 font-extrabold uppercase text-balance text-[28px] leading-[1.1] tracking-[-0.03em] text-text-primary sm:text-[38px] md:text-[46px]">
               {group.title}
             </h2>
           </Reveal>
@@ -35,7 +35,7 @@ export function ExtraSections({ group }: { group: ExtraSectionGroup }) {
         <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {group.items.map((item, i) => (
             <Reveal key={item.title} delay={Math.min(i * 0.05, 0.3)}>
-              <article className="h-full rounded-[16px] border border-border bg-surface p-6 transition-colors duration-300 hover:border-text-muted/40">
+              <article className="h-full rounded-none border border-border bg-surface p-6 transition-colors duration-300 hover:border-text-muted/40">
                 <h3 className="text-[17px] tracking-[-0.01em] text-text-primary sm:text-[18px]">
                   {item.title}
                 </h3>

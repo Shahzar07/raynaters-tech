@@ -22,7 +22,7 @@ export const metadata: Metadata = pageMetadata({
 
 export default function CaseStudiesPage() {
   return (
-    <main className="relative grain min-h-screen overflow-x-hidden">
+    <main className="relative min-h-screen overflow-x-hidden">
       <JsonLd
         data={breadcrumbSchema([
           { name: 'Home', path: '/' },
@@ -32,15 +32,6 @@ export default function CaseStudiesPage() {
       <Navigation />
 
       <section className="relative overflow-hidden border-b border-border pt-10 pb-14 sm:pt-12 sm:pb-20">
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-          <div
-            className="absolute left-1/2 top-[-25%] h-[520px] w-[1000px] -translate-x-1/2 rounded-full"
-            style={{
-              background:
-                'radial-gradient(closest-side, rgba(211,251,163,0.12), transparent 72%)',
-            }}
-          />
-        </div>
         <Container>
           <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Case studies', path: '/case-studies' }]} />
           <div className="mt-8 max-w-[760px]">
@@ -48,7 +39,7 @@ export default function CaseStudiesPage() {
               <Eyebrow>Case studies</Eyebrow>
             </Reveal>
             <Reveal delay={0.05}>
-              <h1 className="mt-5 font-display text-balance text-[34px] leading-[1.06] tracking-tightest text-text-primary sm:text-[50px] md:text-[62px] md:leading-[1.02]">
+              <h1 className="mt-5 font-extrabold uppercase text-balance text-[34px] leading-[1.06] tracking-tightest text-text-primary sm:text-[50px] md:text-[62px] md:leading-[1.02]">
                 Real UK deployments. Real recovered revenue.
               </h1>
             </Reveal>

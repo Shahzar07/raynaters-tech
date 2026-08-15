@@ -8,8 +8,8 @@ const page: LandingPage = {
   navLabel: 'AI Receptionist for Cosmetic Clinics',
   navBlurb: 'Capture every aesthetic enquiry and fill your treatment book.',
   image: {
-    src: 'https://d8j0ntlcm91z4.cloudfront.net/user_31J28LgsUCQmK5Ux97L8IuICZIM/hf_20260604_155004_73a98940-c917-4a6c-acc7-6848fe486d68.png',
-    alt: 'Luxury aesthetic clinic treatment room with sleek modern reclining chair and premium clinical equipment',
+    src: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1600&q=80',
+    alt: 'Practitioner applying a treatment to a client at an aesthetics clinic',
   },
   showcase: {
     eyebrow: 'How it works for cosmetic clinics',
@@ -17,12 +17,40 @@ const page: LandingPage = {
       {
         title: 'Every high-value enquiry captured instantly',
         body: 'When you\'re mid-treatment and can\'t answer, our AI receptionist responds instantly — qualifying against suitability criteria and booking consultations before the lead goes cold.',
-        image: { src: 'https://d8j0ntlcm91z4.cloudfront.net/user_31J28LgsUCQmK5Ux97L8IuICZIM/hf_20260604_155033_d675c0fa-3787-41d5-ad52-ac7e7b8d41f9.png', alt: 'AI receptionist dashboard capturing cosmetic clinic enquiries and booking treatment consultations' },
+        visual: {
+          kind: 'pipeline',
+          label: 'Consultation pipeline · last 30 days',
+          stages: [
+            { label: 'Enquiries received', value: 518 },
+            { label: 'Answered within 60s', value: 518 },
+            { label: 'Treatment qualified', value: 331 },
+            { label: 'Consultations booked', value: 204 },
+          ],
+          footnote: 'High-intent ad and social enquiries answered before they message a competitor.',
+        },
       },
       {
         title: 'No-shows reduced, deposits secured',
         body: 'The agent sends reminders and deposit prompts automatically, protecting high-value treatment slots without adding any work for your team.',
-        image: { src: 'https://d8j0ntlcm91z4.cloudfront.net/user_31J28LgsUCQmK5Ux97L8IuICZIM/hf_20260604_155039_5730193a-d2ee-4346-be52-d4dd0d05a2c3.png', alt: 'Automation pipeline showing cosmetic enquiries converting to confirmed bookings with deposit collection' },
+        visual: {
+          kind: 'roi',
+          label: 'Recovered bookings',
+          metrics: [
+            { label: 'Monthly recovered', value: '£6,800' },
+            { label: 'Payback reached', value: 'Day 38' },
+          ],
+          seriesLabel: 'Recovered booking value per month (£00s)',
+          trend: 'Up month on month',
+          series: [
+            { label: 'M1', value: 21 },
+            { label: 'M2', value: 38 },
+            { label: 'M3', value: 52 },
+            { label: 'M4', value: 61 },
+            { label: 'M5', value: 68 },
+            { label: 'M6', value: 66 },
+          ],
+          footnote: 'Deposits collected at the point of booking, so no-shows drop too.',
+        },
       },
     ],
   },
@@ -99,11 +127,11 @@ const page: LandingPage = {
     ],
   },
 
-  pricingROI: {
-    headline: 'One recovered treatment booking can cover the month.',
-    body: 'With treatment values often well over £150, recovering a single missed booking can cover the monthly cost. Pricing is fixed to your enquiry volume — and if it has not paid for itself in 90 days, we keep building until it does.',
+  paybackROI: {
+    headline: 'One recovered booking can cover the month.',
+    body: 'With treatment values often well over £150, recovering a single missed booking is usually all it takes for the system to be worth it. Scoped to your enquiry volume — and if it has not paid for itself in 90 days, we keep building until it does.',
     bullets: [
-      'Fixed monthly price scoped to your enquiry volume.',
+      'Scoped to your enquiry volume and agreed in writing before we build.',
       'Connects to your existing number and booking system.',
       'Pay-Back-Or-We-Keep-Building guarantee.',
       'Written ROI projection within 48 hours of your free audit.',

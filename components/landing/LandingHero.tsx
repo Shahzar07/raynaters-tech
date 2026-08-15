@@ -23,15 +23,6 @@ export function LandingHero({
 }) {
   return (
     <section className="relative overflow-hidden border-b border-border pt-10 pb-16 sm:pt-12 sm:pb-20 md:pb-24">
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div
-          className="absolute left-1/2 top-[-25%] h-[560px] w-[1000px] -translate-x-1/2 rounded-full"
-          style={{
-            background:
-              'radial-gradient(closest-side, rgba(211,251,163,0.14), rgba(211,251,163,0.04) 45%, transparent 72%)',
-          }}
-        />
-      </div>
       <Container>
         <Breadcrumbs items={crumbs} />
         <div className={`mt-8 ${image ? 'grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16' : ''}`}>
@@ -41,7 +32,7 @@ export function LandingHero({
               <Eyebrow>{eyebrow}</Eyebrow>
             </Reveal>
             <Reveal delay={0.05}>
-              <h1 className="mt-5 font-display text-balance text-[34px] leading-[1.06] tracking-tightest text-text-primary sm:text-[50px] md:text-[56px] md:leading-[1.02]">
+              <h1 className="mt-5 font-extrabold uppercase text-balance text-[34px] leading-[1.06] tracking-tightest text-text-primary sm:text-[50px] md:text-[56px] md:leading-[1.02]">
                 {h1}
               </h1>
             </Reveal>
@@ -56,6 +47,8 @@ export function LandingHero({
                   href={bookHref({ campaign: utmCampaign, content: 'hero_cta' })}
                   size="lg"
                   withArrow
+                  pulse
+                  depth
                   className="w-full sm:w-auto"
                 >
                   Book your free Agent Audit

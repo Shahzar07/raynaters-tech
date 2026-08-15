@@ -8,8 +8,8 @@ const page: LandingPage = {
   navLabel: 'AI Automation for Law Firms',
   navBlurb: 'Automate intake, scheduling and chasing — bill more hours.',
   image: {
-    src: 'https://d8j0ntlcm91z4.cloudfront.net/user_31J28LgsUCQmK5Ux97L8IuICZIM/hf_20260604_155001_a6493dbe-b2df-4c25-94b4-038be364f136.png',
-    alt: 'Prestigious UK solicitor law office with mahogany bookshelves of legal volumes and elegant wooden desk',
+    src: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=80',
+    alt: 'Solicitor signing legal documents at a desk',
   },
   showcase: {
     eyebrow: 'What the agents automate',
@@ -17,12 +17,40 @@ const page: LandingPage = {
       {
         title: 'Intake and qualification running 24/7',
         body: 'Agents capture new enquiries around the clock, qualify against your matter types and criteria, and route only the relevant cases to fee-earners — with context attached.',
-        image: { src: 'https://d8j0ntlcm91z4.cloudfront.net/user_31J28LgsUCQmK5Ux97L8IuICZIM/hf_20260604_155033_d675c0fa-3787-41d5-ad52-ac7e7b8d41f9.png', alt: 'AI intake qualification dashboard showing call transcripts and client qualification workflow' },
+        visual: {
+          kind: 'pipeline',
+          label: 'Intake pipeline · last 30 days',
+          stages: [
+            { label: 'New enquiries', value: 386 },
+            { label: 'Screened by agent', value: 386 },
+            { label: 'Met matter criteria', value: 214 },
+            { label: 'Consultations booked', value: 138 },
+          ],
+          footnote: 'Conflict-check questions asked up front, so fee earners only see viable matters.',
+        },
       },
       {
         title: 'Admin off your fee-earners\' desks',
         body: 'Scheduling consultations, chasing documents, keeping clients updated — all handled by agents so your team bills the hours that used to go on admin.',
-        image: { src: 'https://d8j0ntlcm91z4.cloudfront.net/user_31J28LgsUCQmK5Ux97L8IuICZIM/hf_20260604_155036_f5a15de6-656a-4512-a6c5-827c4f5d2dca.png', alt: 'AI agent operations dashboard showing hours saved, tasks automated and billable time recovered' },
+        visual: {
+          kind: 'roi',
+          label: 'Fee-earner time returned',
+          metrics: [
+            { label: 'Billable hrs back', value: '612' },
+            { label: 'Payback reached', value: 'Day 54' },
+          ],
+          seriesLabel: 'Billable hours recovered per month',
+          trend: 'Up quarter on quarter',
+          series: [
+            { label: 'M1', value: 62 },
+            { label: 'M2', value: 88 },
+            { label: 'M3', value: 104 },
+            { label: 'M4', value: 118 },
+            { label: 'M5', value: 122 },
+            { label: 'M6', value: 118 },
+          ],
+          footnote: 'Time previously lost to intake calls, chasing and file setup.',
+        },
       },
     ],
   },
@@ -99,11 +127,11 @@ const page: LandingPage = {
     ],
   },
 
-  pricingROI: {
-    headline: 'Priced against the billable hours it returns.',
-    body: 'Each engagement is fixed-scope and built around a clear ROI target — usually measured in fee-earner hours recovered and intake conversion. If it has not paid for itself within 90 days, we keep building until it does.',
+  paybackROI: {
+    headline: 'Measured in billable hours returned.',
+    body: 'Every engagement is fixed-scope and built around a clear ROI target — usually fee-earner hours recovered and intake conversion. If it has not paid for itself within 90 days, we keep building until it does.',
     bullets: [
-      'Fixed-scope quote after your free audit — no open-ended retainers.',
+      'A fixed, written scope after your free audit — no open-ended retainers.',
       'Built to sit alongside your existing case-management system.',
       'Pay-Back-Or-We-Keep-Building guarantee.',
       'Written ROI projection within 48 hours of the call.',

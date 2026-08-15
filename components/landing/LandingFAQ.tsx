@@ -1,4 +1,4 @@
-import { Container } from '@/components/ui/Container';
+﻿import { Container } from '@/components/ui/Container';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Reveal } from '@/components/ui/Reveal';
 import { Accordion } from '@/components/ui/Accordion';
@@ -14,7 +14,7 @@ export function LandingFAQ({ faqs }: { faqs: FAQ[] }) {
               <Eyebrow>FAQ</Eyebrow>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="mt-5 font-display text-balance text-[28px] leading-[1.1] tracking-[-0.03em] text-text-primary sm:text-[38px] md:text-[46px]">
+              <h2 className="mt-5 font-extrabold uppercase text-balance text-[28px] leading-[1.1] tracking-[-0.03em] text-text-primary sm:text-[38px] md:text-[46px]">
                 Questions, answered straight.
               </h2>
             </Reveal>

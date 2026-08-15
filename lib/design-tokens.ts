@@ -1,24 +1,28 @@
 // ============================================================
-// RAYNATERS TECH — AGENTIC FORCES FUNNEL
-// Design Tokens / Single Source of Truth
+// RAYNATERS TECH — Design Tokens / Single Source of Truth
+// Light editorial system: warm paper, ink, one lime highlight,
+// one red signal. Square corners. Heavy uppercase type.
 // ============================================================
 
 type Bezier = [number, number, number, number];
 
 export const TOKENS = {
   colors: {
-    bg: '#0A0A0B',
-    surface: '#131316',
-    surfaceHover: '#18181C',
-    border: '#1F1F23',
-    textPrimary: '#FAFAFA',
-    textSecondary: '#A1A1AA',
-    textMuted: '#71717A',
+    bg: '#FAFAF8',
+    bgAlt: '#FFFFFF',
+    bgSunken: '#F3F2EE',
+    ink: '#121211',
+    inkSoft: '#1C1B19',
+    border: '#E5E3DC',
+    borderStrong: '#121211',
+    textPrimary: '#121211',
+    textSecondary: '#4A4843',
+    textMuted: '#6E6B62',
+    textOnInk: '#FAFAF8',
     accent: '#D3FBA3',
-    accentHover: '#BFEF8A',
-    accentMuted: '#D3FBA30D',
-    success: '#4ADE80',
-    successMuted: '#4ADE8014',
+    accentInk: '#3D5A11',
+    signal: '#C93A1B',
+    success: '#2F8F4E',
   },
   motion: {
     ease: [0.22, 1, 0.36, 1] as Bezier,

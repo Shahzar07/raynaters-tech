@@ -11,8 +11,8 @@ const resource: Resource = {
   dateModified: '2026-02-03',
   featured: true,
   coverImage: {
-    src: 'https://d8j0ntlcm91z4.cloudfront.net/user_31J28LgsUCQmK5Ux97L8IuICZIM/hf_20260604_155044_3c399a07-3596-41d0-a208-6b2f04194859.png',
-    alt: 'Clean modern desk setup with open laptop showing financial data representing AI receptionist cost research',
+    src: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80',
+    alt: 'Business owner working through paperwork and costs with a calculator',
   },
 
   directAnswer:

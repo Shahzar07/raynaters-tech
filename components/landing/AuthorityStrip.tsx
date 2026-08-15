@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Container, Section } from '@/components/ui/Container';
 import { CountUp } from '@/components/ui/CountUp';
@@ -32,9 +32,9 @@ export function AuthorityStrip() {
             <motion.div
               key={s.label}
               variants={staggerItem}
-              className="rounded-[16px] border border-border bg-surface p-6 text-center sm:p-8"
+              className="rounded-none border border-border bg-surface p-6 text-center sm:p-8"
             >
-              <p className="font-display text-[44px] leading-none tracking-[-0.04em] text-accent sm:text-[56px]">
+              <p className="font-extrabold uppercase text-[44px] leading-none tracking-[-0.04em] text-signal sm:text-[56px]">
                 <CountUp
                   to={s.to}
                   suffix={'suffix' in s ? s.suffix : ''}
@@ -51,8 +51,8 @@ export function AuthorityStrip() {
         </RevealStagger>
 
         <Reveal delay={0.1}>
-          <div className="mx-auto mt-8 flex max-w-[640px] items-center justify-center gap-3 rounded-full border border-accent/30 bg-accent/[0.06] px-5 py-3 text-center">
-            <ShieldCheck className="h-4 w-4 shrink-0 text-accent" strokeWidth={1.75} />
+          <div className="mx-auto mt-8 flex max-w-[640px] items-center justify-center gap-3 rounded-full border border-ink bg-accent/30 px-5 py-3 text-center">
+            <ShieldCheck className="h-4 w-4 shrink-0 text-signal" strokeWidth={1.75} />
             <p className="text-[13px] text-text-secondary sm:text-[14px]">
               Pay-Back-Or-We-Keep-Building guarantee — agents pay for themselves within 90 days, or we keep building until they do.
             </p>

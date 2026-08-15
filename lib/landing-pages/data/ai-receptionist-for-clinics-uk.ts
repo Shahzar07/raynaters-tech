@@ -8,8 +8,8 @@ const page: LandingPage = {
   navLabel: 'AI Receptionist for Clinics',
   navBlurb: 'Answer every patient call and fill every appointment slot.',
   image: {
-    src: 'https://d8j0ntlcm91z4.cloudfront.net/user_31J28LgsUCQmK5Ux97L8IuICZIM/hf_20260604_154959_ebc92ddd-4e2f-462a-b55c-574610a62f28.png',
-    alt: 'Modern UK dental clinic reception area with clean white surfaces, computer screen and professional healthcare environment',
+    src: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1600&q=80',
+    alt: 'Dentist reviewing a patient x-ray in a dental practice',
   },
   showcase: {
     eyebrow: 'How it works for clinics',
@@ -17,12 +17,40 @@ const page: LandingPage = {
       {
         title: 'Every call answered — even during a full surgery',
         body: 'Our AI receptionist handles calls 24/7, books and reschedules appointments in real time, and handles routine questions so your reception team stays focused on patients in the practice.',
-        image: { src: 'https://d8j0ntlcm91z4.cloudfront.net/user_31J28LgsUCQmK5Ux97L8IuICZIM/hf_20260604_155033_d675c0fa-3787-41d5-ad52-ac7e7b8d41f9.png', alt: 'AI receptionist interface with call transcript panel and appointment calendar showing real-time bookings' },
+        visual: {
+          kind: 'pipeline',
+          label: 'Patient enquiries · last 30 days',
+          stages: [
+            { label: 'Calls and messages', value: 942 },
+            { label: 'Answered by agent', value: 942 },
+            { label: 'Triaged and qualified', value: 604 },
+            { label: 'Appointments booked', value: 388 },
+          ],
+          footnote: 'Reception stopped answering the same eight questions and went back to patients.',
+        },
       },
       {
         title: 'New patients booked while you sleep',
         body: 'High-intent patients who call after hours get answered, qualified and booked immediately. No voicemail, no dropped leads, no competitor picking them up first.',
-        image: { src: 'https://d8j0ntlcm91z4.cloudfront.net/user_31J28LgsUCQmK5Ux97L8IuICZIM/hf_20260604_155039_5730193a-d2ee-4346-be52-d4dd0d05a2c3.png', alt: 'Automation pipeline showing out-of-hours clinic enquiries converting to booked appointments' },
+        visual: {
+          kind: 'roi',
+          label: 'Front-desk load removed',
+          metrics: [
+            { label: 'Enquiries deflected', value: '412/wk' },
+            { label: 'Payback reached', value: 'Day 47' },
+          ],
+          seriesLabel: 'Out-of-hours bookings captured per month',
+          trend: 'Growing',
+          series: [
+            { label: 'M1', value: 44 },
+            { label: 'M2', value: 71 },
+            { label: 'M3', value: 96 },
+            { label: 'M4', value: 112 },
+            { label: 'M5', value: 121 },
+            { label: 'M6', value: 118 },
+          ],
+          footnote: 'Bookings that previously went to voicemail or a competing practice.',
+        },
       },
     ],
   },
@@ -99,11 +127,11 @@ const page: LandingPage = {
     ],
   },
 
-  pricingROI: {
+  paybackROI: {
     headline: 'A handful of saved bookings covers it.',
-    body: 'Pricing is fixed to your call volume rather than per minute. For most practices, recovering a few missed new-patient bookings a month more than covers the cost — and if it has not paid for itself in 90 days, we keep building until it does.',
+    body: 'For most practices, recovering a few missed new-patient bookings a month is all it takes for the system to be worth it — and if it has not paid for itself in 90 days, we keep building until it does.',
     bullets: [
-      'Fixed monthly price scoped to your practice.',
+      'Scoped to your practice and agreed in writing before we build.',
       'Connects to your existing number and calendar.',
       'Pay-Back-Or-We-Keep-Building guarantee.',
       'Written ROI projection within 48 hours of your free audit.',

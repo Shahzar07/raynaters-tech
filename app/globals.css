@@ -3,16 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --bg: #0A0A0B;
-  --surface: #131316;
-  --surface-hover: #18181C;
-  --border: #1F1F23;
-  --text-primary: #FAFAFA;
-  --text-secondary: #A1A1AA;
-  --text-muted: #71717A;
+  --bg: #FAFAF8;
+  --bg-alt: #FFFFFF;
+  --bg-sunken: #F3F2EE;
+  --ink: #121211;
+  --ink-soft: #1C1B19;
+  --border: #E5E3DC;
+  --text-primary: #121211;
+  --text-secondary: #4A4843;
+  --text-muted: #6E6B62;
   --accent: #D3FBA3;
-  --accent-hover: #BFEF8A;
-  --success: #4ADE80;
+  --accent-ink: #3D5A11;
+  --signal: #C93A1B;
+  --success: #2F8F4E;
 }
 
 * {
@@ -24,7 +27,6 @@
 html, body {
   background: var(--bg);
   color: var(--text-primary);
-  font-feature-settings: 'cv11', 'ss01';
   overflow-x: hidden;
 }
 
@@ -39,11 +41,11 @@ html {
 }
 
 ::selection {
-  background: rgba(211, 251, 163, 0.35);
-  color: var(--text-primary);
+  background: var(--accent);
+  color: var(--ink);
 }
 
-/* Restrained focus styling — accent ring on the few things that take focus */
+/* Focus ring — ink on light, so it reads on every surface we use */
 :focus-visible {
   outline: none;
 }
@@ -51,9 +53,9 @@ button:focus-visible,
 a:focus-visible,
 [role="button"]:focus-visible,
 input:focus-visible,
+select:focus-visible,
 textarea:focus-visible {
-  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(211, 251, 163, 0.55);
-  border-radius: 8px;
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ink);
 }
 
 /* Marquee gradient mask — fades edges so the loop seam is invisible */
@@ -61,28 +63,80 @@ textarea:focus-visible {
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
+/* On ink-coloured strips the mask has to fade to the strip colour instead */
+.marquee-mask-ink {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
 
-/* Hairline noise overlay for the page — keeps gradients from looking flat AI-rendered */
-.grain {
+/* Highlighter — the one place brand lime does real work on light paper */
+.mark-accent {
+  background: linear-gradient(to bottom, transparent 12%, var(--accent) 12%, var(--accent) 92%, transparent 92%);
+  padding: 0 0.08em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* ------------------------------------------------------------
+   CTA buttons.
+
+   .cta-depth  — the button sits on a solid signal-red slab. Hover
+                 presses it down onto the slab, active flattens it
+                 completely. Hard offset, never a blur: the slab is a
+                 shape, the same way every border in this system is.
+   .cta-pulse  — a periodic vibrate so the button catches the eye in
+                 peripheral vision without ever moving the layout.
+   ------------------------------------------------------------ */
+.cta-depth {
   position: relative;
-}
-.grain::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.025;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  box-shadow: 0 6px 0 0 var(--accent);
+  transition: box-shadow 0.15s ease-out, transform 0.15s ease-out,
+    background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
-/* Subtle dotted divider used between major sections */
-.divider-dotted {
-  background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
-  background-size: 4px 4px;
-  background-repeat: repeat-x;
-  height: 1px;
-  background-position: top center;
+.cta-depth:hover {
+  box-shadow: 0 3px 0 0 var(--accent);
+  transform: translateY(3px);
+}
+
+.cta-depth:active {
+  box-shadow: 0 0 0 0 var(--accent);
+  transform: translateY(6px);
+}
+
+/* A lime button needs its own shadow-side, not another lime slab. */
+.cta-depth-olive {
+  box-shadow: 0 6px 0 0 var(--accent-ink);
+}
+.cta-depth-olive:hover {
+  box-shadow: 0 3px 0 0 var(--accent-ink);
+}
+.cta-depth-olive:active {
+  box-shadow: 0 0 0 0 var(--accent-ink);
+}
+
+/* The vibrate lives on a wrapper so it never fights the press transform. */
+.cta-pulse {
+  animation: cta-nudge 5s ease-in-out infinite;
+}
+
+@keyframes cta-nudge {
+  0%, 88%, 100% { transform: translate3d(0, 0, 0); }
+  90%  { transform: translate3d(-2.5px, 0, 0); }
+  92%  { transform: translate3d(2.5px, 0, 0); }
+  94%  { transform: translate3d(-2px, 0, 0); }
+  96%  { transform: translate3d(1.5px, 0, 0); }
+  98%  { transform: translate3d(0, 0, 0); }
+}
+
+/* Recording dot on media badges — signals "this is real footage". */
+.rec-dot {
+  animation: rec-blink 1.6s ease-in-out infinite;
+}
+
+@keyframes rec-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.25; }
 }
 
 /* Reduced motion respect */
@@ -96,6 +150,6 @@ textarea:focus-visible {
 
 /* Custom scrollbar — minimal */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
-::-webkit-scrollbar-thumb:hover { background: #2a2a2f; }
+::-webkit-scrollbar-track { background: var(--bg-sunken); }
+::-webkit-scrollbar-thumb { background: #D6D3C9; border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }

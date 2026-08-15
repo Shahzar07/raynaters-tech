@@ -8,7 +8,7 @@ import { FeatureShowcase } from './FeatureShowcase';
 import { HowItWorks } from './HowItWorks';
 import { ComparisonTable } from './ComparisonTable';
 import { ExtraSections } from './ExtraSections';
-import { PricingROI } from './PricingROI';
+import { PaybackROI } from './PaybackROI';
 import { AuthorityStrip } from './AuthorityStrip';
 import { MiniCaseStory } from './MiniCaseStory';
 import { LandingFAQ } from './LandingFAQ';
@@ -17,7 +17,7 @@ import type { LandingPage } from '@/lib/landing-pages/types';
 
 export function VerticalLandingPage({ data }: { data: LandingPage }) {
   return (
-    <main className="relative grain min-h-screen overflow-x-hidden">
+    <main className="relative min-h-screen overflow-x-hidden">
       <Navigation />
 
       <LandingHero
@@ -48,7 +48,7 @@ export function VerticalLandingPage({ data }: { data: LandingPage }) {
 
       {data.extraSections && <ExtraSections group={data.extraSections} />}
 
-      <PricingROI data={data.pricingROI} utmCampaign={data.utmCampaign} />
+      <PaybackROI data={data.paybackROI} utmCampaign={data.utmCampaign} />
 
       <AuthorityStrip />
 

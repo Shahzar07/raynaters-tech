@@ -1,4 +1,4 @@
-import Image from 'next/image';
+﻿import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -30,7 +30,7 @@ export function ImageCard({
 }: ImageCardProps) {
   return (
     <Link href={href} className={cn('group block h-full', className)}>
-      <article className="relative flex h-full flex-col overflow-hidden rounded-[18px] border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-text-muted/40">
+      <article className="relative flex h-full flex-col overflow-hidden rounded-none border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-text-muted/40">
         {/* Image */}
         <div className="relative aspect-[16/9] overflow-hidden">
           <Image
@@ -60,7 +60,7 @@ export function ImageCard({
         <div className="flex flex-1 flex-col p-6 sm:p-7">
           {metric && (
             <div className="mb-3">
-              <span className="font-display text-[38px] leading-none tracking-[-0.04em] text-accent sm:text-[44px]">
+              <span className="font-extrabold uppercase text-[38px] leading-none tracking-[-0.04em] text-signal sm:text-[44px]">
                 {metric}
               </span>
               {metricLabel && (
@@ -71,11 +71,11 @@ export function ImageCard({
             </div>
           )}
           <div className="flex items-start justify-between gap-3">
-            <h3 className="flex-1 font-display text-balance text-[19px] leading-[1.2] tracking-[-0.02em] text-text-primary sm:text-[20px]">
+            <h3 className="flex-1 font-extrabold uppercase text-balance text-[19px] leading-[1.2] tracking-[-0.02em] text-text-primary sm:text-[20px]">
               {title}
             </h3>
             <ArrowUpRight
-              className="mt-0.5 h-5 w-5 shrink-0 text-text-muted transition-colors group-hover:text-accent"
+              className="mt-0.5 h-5 w-5 shrink-0 text-text-muted transition-colors group-hover:text-signal"
               strokeWidth={2}
             />
           </div>

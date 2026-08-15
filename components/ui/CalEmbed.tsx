@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
@@ -25,7 +25,7 @@ export default function CalEmbed() {
   }, []);
 
   return (
-    <div className="h-full w-full overflow-hidden rounded-[12px] bg-bg">
+    <div className="h-full w-full overflow-hidden rounded-none bg-bg">
       <Cal 
         namespace="in-20mins"
         calLink="automate-with-raynaters/in-20mins"

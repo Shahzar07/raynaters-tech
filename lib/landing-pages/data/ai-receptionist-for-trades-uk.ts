@@ -8,8 +8,8 @@ const page: LandingPage = {
   navLabel: 'AI Receptionist for Trades',
   navBlurb: 'Answer every call and book every job — even on the tools.',
   image: {
-    src: 'https://d8j0ntlcm91z4.cloudfront.net/user_31J28LgsUCQmK5Ux97L8IuICZIM/hf_20260604_154957_621a8568-1959-40fb-92a5-1981ef7ca93d.png',
-    alt: 'Skilled tradesperson engineer working on a modern boiler in a neat UK workshop with tools on workbench',
+    src: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=1600&q=80',
+    alt: 'Commercial heating pipework and gas valves mounted on a brick wall',
   },
   showcase: {
     eyebrow: 'How it works for trades',
@@ -17,12 +17,40 @@ const page: LandingPage = {
       {
         title: 'Never lose a job to voicemail again',
         body: 'When you\'re on the tools, every unanswered call is a missed booking. Our AI receptionist answers instantly, qualifies the job, and books it straight into your diary.',
-        image: { src: 'https://d8j0ntlcm91z4.cloudfront.net/user_31J28LgsUCQmK5Ux97L8IuICZIM/hf_20260604_155033_d675c0fa-3787-41d5-ad52-ac7e7b8d41f9.png', alt: 'AI receptionist dashboard showing active call transcript and appointment booking panel with confirmed jobs' },
+        visual: {
+          kind: 'pipeline',
+          label: 'Call pipeline · last 30 days',
+          stages: [
+            { label: 'Calls received', value: 674 },
+            { label: 'Answered by agent', value: 674 },
+            { label: 'Job qualified', value: 402 },
+            { label: 'Booked into diary', value: 263 },
+          ],
+          footnote: 'Emergencies flagged straight to your phone; everything else booked automatically.',
+        },
       },
       {
         title: 'From missed call to confirmed booking in seconds',
         body: 'The agent captures job type, address and urgency, books into your schedule and sends the customer a confirmation — all before you\'ve finished your current job.',
-        image: { src: 'https://d8j0ntlcm91z4.cloudfront.net/user_31J28LgsUCQmK5Ux97L8IuICZIM/hf_20260604_155039_5730193a-d2ee-4346-be52-d4dd0d05a2c3.png', alt: 'Automation pipeline showing missed calls turning into confirmed bookings with calendar slots filling up' },
+        visual: {
+          kind: 'roi',
+          label: 'Work recovered from voicemail',
+          metrics: [
+            { label: 'Monthly recovered', value: '£4,100' },
+            { label: 'Payback reached', value: 'Day 42' },
+          ],
+          seriesLabel: 'Out-of-hours jobs booked per month',
+          trend: 'Steady climb',
+          series: [
+            { label: 'M1', value: 12 },
+            { label: 'M2', value: 19 },
+            { label: 'M3', value: 27 },
+            { label: 'M4', value: 31 },
+            { label: 'M5', value: 36 },
+            { label: 'M6', value: 34 },
+          ],
+          footnote: 'Jobs booked overnight and at weekends that used to ring out.',
+        },
       },
     ],
   },
@@ -99,11 +127,11 @@ const page: LandingPage = {
     ],
   },
 
-  pricingROI: {
+  paybackROI: {
     headline: 'One booked job a week usually covers it.',
-    body: "Pricing is fixed to your call volume, not a per-minute meter. For most trades, a single recovered job a week more than covers the cost — and if it hasn't paid for itself in 90 days, we keep building until it does.",
+    body: "For most trades, a single recovered job a week is all it takes for the system to be worth it — and if it hasn't paid for itself in 90 days, we keep building until it does.",
     bullets: [
-      'Fixed monthly price scoped to your call volume.',
+      'Scoped to your call volume and agreed in writing before we build.',
       'Goes live on your existing business number.',
       'Pay-Back-Or-We-Keep-Building guarantee.',
       'Written ROI projection within 48 hours of your free audit.',

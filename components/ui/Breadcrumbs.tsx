@@ -30,7 +30,7 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
                 </Link>
               )}
               {!last && (
-                <span aria-hidden className="text-text-muted/50">
+                <span aria-hidden className="text-text-muted">
                   /
                 </span>
               )}

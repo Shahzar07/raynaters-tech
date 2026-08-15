@@ -6,6 +6,8 @@ interface MarqueeProps {
   speed?: 'fast' | 'normal' | 'slow';
   direction?: 'left' | 'right';
   pauseOnHover?: boolean;
+  /** Tailwind gap utility — cards need a tighter rhythm than bare logos. */
+  gap?: string;
 }
 
 export function Marquee({
@@ -14,6 +16,7 @@ export function Marquee({
   speed = 'normal',
   direction = 'left',
   pauseOnHover = false,
+  gap = 'gap-12',
 }: MarqueeProps) {
   const animationClass = direction === 'left' 
     ? (speed === 'fast' ? 'animate-marquee-fast' : speed === 'slow' ? 'animate-marquee-slow' : 'animate-marquee')
@@ -23,13 +26,14 @@ export function Marquee({
     <div className={cn('marquee-mask overflow-hidden', className)}>
       <div
         className={cn(
-          'flex w-max gap-12',
+          'flex w-max',
+          gap,
           animationClass,
           pauseOnHover && 'hover:[animation-play-state:paused]',
         )}
       >
-        <div className="flex shrink-0 items-center gap-12">{children}</div>
-        <div className="flex shrink-0 items-center gap-12" aria-hidden>
+        <div className={cn('flex shrink-0 items-center', gap)}>{children}</div>
+        <div className={cn('flex shrink-0 items-center', gap)} aria-hidden>
           {children}
         </div>
       </div>

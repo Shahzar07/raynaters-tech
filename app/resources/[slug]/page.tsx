@@ -51,7 +51,7 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
   ];
 
   return (
-    <main className="relative grain min-h-screen overflow-x-hidden">
+    <main className="relative min-h-screen overflow-x-hidden">
       <JsonLd
         data={[
           breadcrumbSchema(crumbs),
@@ -74,7 +74,7 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
           <div className="mt-8">
             <Eyebrow>{resource.category}</Eyebrow>
             <Reveal delay={0.05}>
-              <h1 className="mt-5 font-display text-balance text-[32px] leading-[1.08] tracking-tightest text-text-primary sm:text-[44px] md:text-[52px] md:leading-[1.04]">
+              <h1 className="mt-5 font-extrabold uppercase text-balance text-[32px] leading-[1.08] tracking-tightest text-text-primary sm:text-[44px] md:text-[52px] md:leading-[1.04]">
                 {resource.title}
               </h1>
             </Reveal>
@@ -107,7 +107,7 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
           <ArticleBody blocks={resource.body} />
 
           {resource.related && resource.related.length > 0 && (
-            <div className="mt-12 rounded-[16px] border border-border bg-surface p-6 sm:p-7">
+            <div className="mt-12 rounded-none border border-border bg-surface p-6 sm:p-7">
               <p className="text-[12px] uppercase tracking-[0.18em] text-text-muted">
                 Related
               </p>
@@ -116,7 +116,7 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="group inline-flex items-center gap-1.5 text-[15px] font-medium text-accent transition-colors hover:text-accent-hover sm:text-[16px]"
+                      className="group inline-flex items-center gap-1.5 text-[15px] font-medium text-signal transition-colors hover:text-signal sm:text-[16px]"
                     >
                       {link.label}
                       <ArrowRight className="h-4 w-4" strokeWidth={2.25} />
@@ -129,7 +129,7 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
 
           {resource.faqs && resource.faqs.length > 0 && (
             <div className="mt-14">
-              <h2 className="font-display text-[26px] leading-[1.12] tracking-[-0.03em] text-text-primary sm:text-[32px]">
+              <h2 className="font-extrabold uppercase text-[26px] leading-[1.12] tracking-[-0.03em] text-text-primary sm:text-[32px]">
                 Frequently asked questions
               </h2>
               <div className="mt-6">

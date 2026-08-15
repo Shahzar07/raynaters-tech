@@ -1,4 +1,4 @@
-import Image from 'next/image';
+﻿import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 interface MediaFrameProps {
@@ -8,6 +8,7 @@ interface MediaFrameProps {
   aspectClass?: string;
   priority?: boolean;
   overlay?: boolean;
+  /** @deprecated no-op since the light rebuild — kept so callers still compile. */
   glow?: boolean;
   className?: string;
   sizes?: string;
@@ -19,16 +20,14 @@ export function MediaFrame({
   aspectClass = 'aspect-video',
   priority = false,
   overlay = false,
-  glow = false,
   className,
   sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 50vw',
 }: MediaFrameProps) {
   return (
     <div
       className={cn(
-        'relative overflow-hidden rounded-[16px] border border-border',
+        'relative overflow-hidden rounded-none border-2 border-ink',
         aspectClass,
-        glow && 'shadow-[0_0_50px_-12px_rgba(211,251,163,0.25)]',
         className
       )}
     >

@@ -2,7 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import type { Resource } from '@/lib/resources/types';
+import { cn } from '@/lib/utils';
 
+/**
+ * Square corners, 2px ink borders, uppercase 800 headings — the same
+ * system the homepage sections use, so the index doesn't read as a
+ * different site once you leave the funnel.
+ */
 export function ResourceCard({
   resource,
   featured = false,
@@ -12,58 +18,71 @@ export function ResourceCard({
 }) {
   return (
     <Link href={`/resources/${resource.slug}`} className="group block h-full">
-      <article className="flex h-full flex-col overflow-hidden rounded-[18px] border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-text-muted/40">
-        {/* Cover thumbnail */}
+      <article
+        className={cn(
+          'h-full overflow-hidden border-2 border-ink bg-bg-alt transition-transform duration-300 hover:-translate-y-1',
+          featured ? 'grid grid-cols-1 md:grid-cols-2' : 'flex flex-col',
+        )}
+      >
         {resource.coverImage && (
-          <div className={`relative overflow-hidden ${featured ? 'aspect-[21/9]' : 'aspect-[16/9]'}`}>
+          <div
+            className={cn(
+              'relative overflow-hidden bg-bg-sunken',
+              featured
+                ? 'aspect-[16/10] border-b-2 border-ink md:aspect-auto md:min-h-[340px] md:border-b-0 md:border-r-2'
+                : 'aspect-[16/9] border-b-2 border-ink',
+            )}
+          >
             <Image
               src={resource.coverImage.src}
               alt={resource.coverImage.alt}
               fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              sizes={featured ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
             />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0"
-              style={{
-                background:
-                  'linear-gradient(to bottom, transparent 50%, rgba(10,10,11,0.5) 100%)',
-              }}
-            />
+            <span className="absolute left-4 top-4 inline-flex items-center gap-2 bg-ink px-2.5 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.14em] text-text-on-ink">
+              <span aria-hidden className="h-1.5 w-1.5 bg-accent" />
+              {featured ? 'Featured guide' : resource.category}
+            </span>
           </div>
         )}
 
-        {/* Content */}
-        <div className={`flex flex-1 flex-col p-6 sm:p-7 ${featured && !resource.coverImage ? 'md:p-9' : ''}`}>
-          <div className="flex items-center justify-between">
-            <span className="inline-flex w-fit rounded-full border border-border px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-text-muted">
-              {resource.category}
-            </span>
-            <ArrowUpRight
-              className="h-5 w-5 text-text-muted transition-colors group-hover:text-accent"
-              strokeWidth={2}
-            />
-          </div>
+        <div className={cn('flex flex-1 flex-col p-6 sm:p-7', featured && 'md:p-9')}>
+          <span aria-hidden className="block h-[3px] w-12 bg-accent" />
 
           <h3
-            className={
-              'mt-5 font-display text-balance tracking-[-0.02em] text-text-primary ' +
-              (featured
-                ? 'text-[28px] leading-[1.12] sm:text-[36px]'
-                : 'text-[22px] leading-[1.15] sm:text-[24px]')
-            }
+            className={cn(
+              'mt-5 text-balance font-extrabold uppercase tracking-[-0.035em] text-text-primary',
+              featured
+                ? 'text-[26px] leading-[1.1] sm:text-[34px]'
+                : 'text-[20px] leading-[1.14] sm:text-[23px]',
+            )}
           >
             {resource.title}
           </h3>
 
-          <p className="mt-4 flex-1 text-pretty text-[15px] leading-relaxed text-text-secondary sm:text-[16px]">
+          <p
+            className={cn(
+              'mt-4 flex-1 text-pretty font-medium leading-[1.65] text-text-secondary',
+              featured ? 'text-[15px] sm:text-[17px]' : 'text-[14px] sm:text-[15px]',
+            )}
+          >
             {resource.excerpt}
           </p>
 
-          <p className="mt-6 text-[12px] uppercase tracking-[0.14em] text-text-muted">
-            {resource.readingTime} read
-          </p>
+          <div className="mt-7 flex items-center justify-between gap-3 border-t-2 border-border pt-5">
+            <span className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-text-muted">
+              {featured ? `${resource.category} · ` : ''}
+              {resource.readingTime} read
+            </span>
+            <span className="inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.12em] text-text-primary">
+              Read
+              <ArrowUpRight
+                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                strokeWidth={3}
+              />
+            </span>
+          </div>
         </div>
       </article>
     </Link>

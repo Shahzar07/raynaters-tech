@@ -1,4 +1,4 @@
-import Image from 'next/image';
+﻿import Image from 'next/image';
 import type { Block } from '@/lib/resources/types';
 
 export function ArticleBody({ blocks }: { blocks: Block[] }) {
@@ -10,7 +10,7 @@ export function ArticleBody({ blocks }: { blocks: Block[] }) {
             return (
               <h2
                 key={i}
-                className="pt-4 font-display text-balance text-[26px] leading-[1.15] tracking-[-0.03em] text-text-primary sm:text-[32px]"
+                className="pt-4 font-extrabold uppercase text-balance text-[26px] leading-[1.15] tracking-[-0.03em] text-text-primary sm:text-[32px]"
               >
                 {block.text}
               </h2>
@@ -53,7 +53,7 @@ export function ArticleBody({ blocks }: { blocks: Block[] }) {
             return (
               <div
                 key={i}
-                className="rounded-[16px] border border-accent/30 bg-accent/[0.05] p-5 sm:p-6"
+                className="rounded-none border border-ink bg-accent/30 p-5 sm:p-6"
               >
                 <p className="text-pretty text-[16px] leading-relaxed text-text-primary sm:text-[17px]">
                   {block.text}
@@ -104,7 +104,7 @@ export function ArticleBody({ blocks }: { blocks: Block[] }) {
           case 'image':
             return (
               <figure key={i} className="my-2">
-                <div className="relative aspect-video overflow-hidden rounded-[14px] border border-border">
+                <div className="relative aspect-video overflow-hidden rounded-none border border-border">
                   <Image
                     src={block.src}
                     alt={block.alt}

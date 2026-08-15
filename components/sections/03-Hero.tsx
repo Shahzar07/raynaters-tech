@@ -1,12 +1,11 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { CONTENT } from '@/lib/content';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
-import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Marquee } from '@/components/ui/Marquee';
 import { TOKENS } from '@/lib/design-tokens';
 import { cn } from '@/lib/utils';
@@ -17,35 +16,37 @@ const wordContainer = {
 };
 
 const wordItem = {
-  hidden: { opacity: 0, y: 14, filter: 'blur(6px)' },
+  hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: { duration: 0.7, ease: TOKENS.motion.ease },
   },
 };
 
+/**
+ * The only Boldonse on the page. Its caps fill the whole em box, so it
+ * needs much looser leading than a normal display face.
+ *
+ * The line breaks in `h1Lines` are authored, so each one has to clear its
+ * container unbroken. Type is sized against the longest line
+ * ("IT NEEDS BETTER AI SYSTEMS.") at every breakpoint.
+ */
 function AnimatedHeadline() {
   const lines = CONTENT.hero.h1Lines;
-  const allWords = lines.map((line) => line.split(' '));
   return (
     <motion.h1
       variants={wordContainer}
       initial="hidden"
       animate="visible"
-      className="font-display text-balance text-[40px] leading-[1.04] tracking-tightest text-text-primary sm:text-[56px] md:text-[72px] md:leading-[1.02] lg:text-[88px] lg:leading-[1.0]"
+      className="font-display uppercase text-text-primary text-[22px] leading-[1.34] tracking-[-0.04em] sm:text-[34px] sm:leading-[1.32] md:text-[44px] lg:text-[58px] lg:leading-[1.3] lg:tracking-[-0.05em]"
     >
-      {allWords.map((words, lineIdx) => (
+      {lines.map((line, lineIdx) => (
         <span key={lineIdx} className="block">
-          {words.map((w, i) => (
-            <motion.span
-              key={`${lineIdx}-${i}`}
-              variants={wordItem}
-              className="inline-block whitespace-pre"
-            >
+          {line.split(' ').map((w, i, arr) => (
+            <motion.span key={`${lineIdx}-${i}`} variants={wordItem} className="inline-block whitespace-pre">
               {w}
-              {i < words.length - 1 && ' '}
+              {i < arr.length - 1 && ' '}
             </motion.span>
           ))}
         </span>
@@ -54,63 +55,36 @@ function AnimatedHeadline() {
   );
 }
 
-function HeroGlow() {
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-0 -z-10"
-    >
-      <div
-        className="absolute left-1/2 top-[-10%] h-[700px] w-[1100px] -translate-x-1/2 rounded-full"
-        style={{
-          background:
-            'radial-gradient(closest-side, rgba(211,251,163,0.16), rgba(211,251,163,0.05) 45%, transparent 70%)',
-        }}
-      />
-      <div className="absolute bottom-0 left-1/2 h-px w-[80%] -translate-x-1/2 bg-gradient-to-r from-transparent via-border to-transparent" />
-    </div>
-  );
-}
-
 function HeroVideo() {
-  const [canPlay, setCanPlay] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // Delay playback by 5 seconds
     const timer = setTimeout(() => {
-      setCanPlay(true);
-      if (videoRef.current) {
-        videoRef.current.play().then(() => {
-          setIsPlaying(true);
-        }).catch(() => {
-          setIsPlaying(false);
-        });
-      }
-    }, 5000);
+      videoRef.current
+        ?.play()
+        .then(() => setIsPlaying(true))
+        .catch(() => setIsPlaying(false));
+    }, 4000);
     return () => clearTimeout(timer);
   }, []);
 
   const togglePlay = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
+    const v = videoRef.current;
+    if (!v) return;
+    if (isPlaying) v.pause();
+    else void v.play();
+    setIsPlaying(!isPlaying);
   };
 
   const toggleMute = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = !isMuted;
+    setIsMuted(!isMuted);
   };
 
   return (
@@ -118,105 +92,153 @@ function HeroVideo() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: TOKENS.motion.ease, delay: 0.5 }}
-      className="group relative mx-auto mt-10 sm:mt-12 md:mt-16 max-w-[1000px] overflow-hidden rounded-[20px] sm:rounded-[24px] md:rounded-[32px] border-2 sm:border-[3px] md:border-[4px] border-accent/20 bg-surface shadow-[0_0_50px_-12px_rgba(211,251,163,0.3)] cursor-pointer"
+      className="group relative mx-auto mt-12 max-w-[1000px] cursor-pointer border-2 border-ink bg-bg-sunken sm:mt-14 md:mt-16"
       onClick={togglePlay}
     >
+      <div className="absolute -top-[1px] left-4 z-10 -translate-y-1/2 bg-ink px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.14em] text-text-on-ink sm:left-6 sm:text-[11px]">
+        Live system walkthrough
+      </div>
       <div className="aspect-video w-full overflow-hidden">
-        <video
-          ref={videoRef}
-          muted={isMuted}
-          loop
-          playsInline
-          className="h-full w-full object-cover"
-        >
+        <video ref={videoRef} muted={isMuted} loop playsInline className="h-full w-full object-cover">
           <source src="/raynaterstech (1).mp4" type="video/mp4" />
         </video>
       </div>
 
-      {/* Custom Minimal Controls — Parrot Green Accent */}
-      <div className="absolute bottom-3 right-3 sm:bottom-6 sm:right-6 flex items-center gap-2 sm:gap-3 opacity-100 sm:opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+      <div className="absolute bottom-3 right-3 flex items-center gap-2 opacity-100 transition-opacity duration-300 sm:bottom-5 sm:right-5 sm:gap-3 sm:opacity-0 sm:group-hover:opacity-100">
         <button
           onClick={toggleMute}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-bg/60 text-accent backdrop-blur-md transition-all hover:bg-bg/80 hover:scale-110"
-          aria-label={isMuted ? "Unmute" : "Mute"}
+          className="grid h-10 w-10 place-items-center border-2 border-ink bg-bg text-ink transition-colors hover:bg-accent"
+          aria-label={isMuted ? 'Unmute' : 'Mute'}
         >
-          {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+          {isMuted ? <VolumeX size={17} strokeWidth={2.5} /> : <Volume2 size={17} strokeWidth={2.5} />}
         </button>
         <button
           onClick={togglePlay}
-          className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-bg shadow-[0_0_20px_rgba(211,251,163,0.4)] transition-all hover:scale-110 hover:shadow-accent/60"
-          aria-label={isPlaying ? "Pause" : "Play"}
+          className="grid h-12 w-12 place-items-center border-2 border-ink bg-accent text-ink transition-colors hover:bg-ink hover:text-accent"
+          aria-label={isPlaying ? 'Pause' : 'Play'}
         >
-          {isPlaying ? (
-            <Pause size={22} fill="currentColor" />
-          ) : (
-            <Play size={22} fill="currentColor" className="ml-1" />
-          )}
+          {isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" className="ml-0.5" />}
         </button>
       </div>
-
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-accent/[0.03]" />
     </motion.div>
   );
 }
 
-function TrustStrip() {
+/** The three numbers the audit says must appear before any scrolling. */
+function ProofTriple() {
   return (
-    <div className="mt-16 sm:mt-20 md:mt-28">
-      <p className="text-center text-[11px] sm:text-[12px] uppercase tracking-[0.22em] text-text-muted">
+    <div className="mx-auto mt-10 grid max-w-[760px] grid-cols-3 border-2 border-ink sm:mt-12">
+      {CONTENT.hero.proof.map((p, i) => (
+        <div
+          key={p.label}
+          className={cn(
+            'px-2 py-4 text-center sm:px-4 sm:py-5',
+            i > 0 && 'border-l-2 border-ink',
+          )}
+        >
+          <p className="text-[18px] font-extrabold tracking-[-0.04em] text-text-primary sm:text-[26px] md:text-[30px]">
+            {p.value}
+          </p>
+          <p className="mt-1 text-[9px] font-extrabold uppercase leading-tight tracking-[0.1em] text-text-muted sm:text-[11px]">
+            {p.label}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// Logos authored white-on-transparent are invisible on a white card,
+// so they get flipped to solid black instead.
+const WHITE_LOGOS = new Set([
+  'Anthropic', 'Github', 'Notion', 'OpenAI', 'Vercel', 'Pipedream', 'LangChain',
+]);
+
+// These assets already spell the brand out, so they get room to breathe
+// and no text label — printing the name twice looks like a mistake.
+const WORDMARKS = new Set(['Zapier', 'Make', 'LangChain', 'GoHighLevel']);
+
+// The GoHighLevel asset is a white wordmark, so it disappears on a white
+// card. It sits on an ink chip instead — which is how the brand ships it.
+const DARK_CHIP = new Set(['GoHighLevel']);
+
+// A few icon files carry heavy internal padding — scale compensates.
+const LOGO_SCALE: Record<string, string> = {
+  Vercel: 'scale-[1.7]',
+  OpenAI: 'scale-[1.6]',
+  Notion: 'scale-[1.45]',
+  Pipedream: 'scale-[1.35]',
+  Claude: 'scale-[1.15]',
+};
+
+function LogoCard({ item }: { item: { name: string; logo: string } }) {
+  const isWordmark = WORDMARKS.has(item.name);
+  const onChip = DARK_CHIP.has(item.name);
+
+  return (
+    <div className="flex h-[68px] shrink-0 items-center gap-3.5 border-2 border-border bg-bg-alt px-5 transition-colors duration-300 hover:border-ink sm:h-[76px] sm:px-7">
+      {/* Fixed box, so a card never resizes when its image finishes loading
+          and jolts the marquee mid-scroll. `cn` is a plain join with no
+          tailwind-merge, so these sizes have to stay mutually exclusive. */}
+      <span
+        className={cn(
+          'grid shrink-0 place-items-center',
+          onChip
+            ? 'h-10 w-[132px] bg-ink px-2.5'
+            : isWordmark
+              ? 'h-7 w-[112px]'
+              : 'h-8 w-8',
+        )}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={item.logo}
+          alt={isWordmark ? `${item.name} logo` : ''}
+          aria-hidden={isWordmark ? undefined : true}
+          loading="lazy"
+          className={cn(
+            'w-auto object-contain',
+            isWordmark ? 'max-h-6 max-w-full' : 'max-h-8 max-w-[32px]',
+            LOGO_SCALE[item.name],
+            WHITE_LOGOS.has(item.name) && 'brightness-0',
+          )}
+        />
+      </span>
+      {!isWordmark && (
+        <span className="whitespace-nowrap text-[12px] font-extrabold uppercase tracking-[0.08em] text-text-primary sm:text-[13px]">
+          {item.name}
+        </span>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Two rows running against each other — the counter-motion reads as a
+ * bigger stack than a single strip of the same logos ever does.
+ */
+function TrustStrip() {
+  const logos = CONTENT.hero.trustLogos;
+  const half = Math.ceil(logos.length / 2);
+  const rowOne = logos.slice(0, half);
+  const rowTwo = logos.slice(half);
+
+  return (
+    <div className="mt-16 border-t-2 border-border pt-10 sm:mt-20">
+      <p className="text-center text-[11px] font-extrabold uppercase tracking-[0.16em] text-text-muted">
         {CONTENT.hero.trustLabel}
       </p>
-      <div className="mt-6 sm:mt-8 overflow-hidden marquee-mask">
-        <Marquee speed="slow">
-          {CONTENT.hero.trustLogos.map((item) => {
-            // ONLY target logos that are monochrome black (or need to be white for visibility)
-            const shouldBeWhite = 
-              item.name === 'Anthropic' || 
-              item.name === 'Github' || 
-              item.name === 'Notion' || 
-              item.name === 'OpenAI' || 
-              item.name === 'Vercel' ||
-              item.name === 'Pipedream' ||
-              item.name === 'Zapier' ||
-              item.name === 'LangChain' ||
-              item.name === 'Make';
 
-            // Some SVGs/PNGs have large internal padding or thin lines and need scaling up
-            const getScale = (name: string) => {
-              if (name === 'Vercel') return 'scale-[2.8]';
-              if (name === 'OpenAI') return 'scale-[2.5]';
-              if (name === 'Notion') return 'scale-[2.2]';
-              if (name === 'Pipedream') return 'scale-[2.0]';
-              if (name === 'Bubble') return 'scale-[1.8]';
-              if (name === 'HeyGen') return 'scale-[1.1]';
-              if (name === 'GoHighLevel') return 'scale-[1.1]';
-              if (name === 'Claude') return 'scale-[1.5]';
-              if (name === 'Relevance AI') return 'scale-[1.2]';
-              if (name === 'Make') return 'scale-[1.6]';
-              if (name === 'Zapier') return 'scale-[1.4]';
-              if (name === 'LangChain') return 'scale-[1.7]';
-              return 'scale-100';
-            };
-
-            return (
-              <div
-                key={item.name}
-                className="flex h-16 sm:h-20 items-center px-7 sm:px-10 md:px-12"
-              >
-                <div className={cn("flex items-center justify-center transition-transform duration-500", getScale(item.name))}>
-                  <img
-                    src={item.logo}
-                    alt={`${item.name} logo`}
-                    className={cn(
-                      "h-7 sm:h-9 w-auto object-contain opacity-85 transition-all duration-500 hover:opacity-100",
-                      shouldBeWhite && "brightness-0 invert"
-                    )}
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            );
-          })}
+      <div className="mt-8 space-y-4">
+        <Marquee speed="slow" gap="gap-4" pauseOnHover>
+          {rowOne.map((item) => (
+            <LogoCard key={item.name} item={item} />
+          ))}
+        </Marquee>
+        <Marquee speed="slow" direction="right" gap="gap-4" pauseOnHover>
+          {rowTwo.map((item) => (
+            <LogoCard key={item.name} item={item} />
+          ))}
         </Marquee>
       </div>
     </div>
@@ -225,42 +247,75 @@ function TrustStrip() {
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden pt-16 pb-20 sm:pt-20 sm:pb-24 md:pt-32 md:pb-32">
-      <HeroGlow />
+    <section className="relative overflow-hidden border-b-2 border-border pb-16 pt-12 sm:pb-20 sm:pt-16 md:pb-24 md:pt-20">
       <Container>
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: TOKENS.motion.ease, delay: 0.1 }}
-          className="flex justify-center"
-        >
-          <Eyebrow>{CONTENT.hero.eyebrow}</Eyebrow>
-        </motion.div>
+        <div className="mx-auto max-w-[900px] text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: TOKENS.motion.ease, delay: 0.1 }}
+            className="flex justify-center"
+          >
+            <span className="inline-flex items-center gap-2 border-2 border-ink bg-bg-alt px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.14em] text-text-primary sm:text-[11px]">
+              <span aria-hidden className="h-2 w-2 bg-signal" />
+              {CONTENT.hero.eyebrow}
+            </span>
+          </motion.div>
 
-        <div className="mx-auto mt-8 max-w-[1100px] text-center">
-          <AnimatedHeadline />
+          <div className="mt-7 sm:mt-8">
+            <AnimatedHeadline />
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: TOKENS.motion.ease, delay: 0.6 }}
+            className="mx-auto mt-7 max-w-[640px] text-[16px] font-medium leading-[1.62] text-text-secondary sm:text-[18px] md:text-[19px]"
+          >
+            {CONTENT.hero.sub}{' '}
+            <span className="mark-accent font-extrabold uppercase tracking-[-0.01em] text-ink">
+              {CONTENT.hero.subHighlight}
+            </span>
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: TOKENS.motion.ease, delay: 0.72 }}
+            className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center"
+          >
+            <Button href={CONTENT.brand.bookHref} size="lg" withArrow pulse depth>
+              {CONTENT.hero.primaryCta}
+            </Button>
+            <Button href="#automate" size="lg" variant="secondary">
+              {CONTENT.hero.secondaryCta}
+            </Button>
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.85 }}
+            className="mt-5 text-[12px] font-bold uppercase tracking-[0.06em] text-text-muted sm:text-[13px]"
+          >
+            {CONTENT.hero.ctaNote}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: TOKENS.motion.ease, delay: 0.9 }}
+          >
+            <ProofTriple />
+          </motion.div>
         </div>
 
         <HeroVideo />
 
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: TOKENS.motion.ease, delay: 0.7 }}
-          className="mt-10 sm:mt-14 flex flex-col items-stretch justify-center gap-3 sm:gap-4 px-4 sm:flex-row sm:items-center sm:px-0"
-        >
-          <Button href={CONTENT.brand.bookHref} size="lg" withArrow className="w-full sm:w-auto">
-            {CONTENT.hero.primaryCta}
-          </Button>
-          <Button href="#industry" size="lg" variant="ghost" className="w-full sm:w-auto">
-            {CONTENT.hero.secondaryCta}
-          </Button>
-        </motion.div>
-
-        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, ease: TOKENS.motion.ease, delay: 0.85 }}
+          transition={{ duration: 0.8, ease: TOKENS.motion.ease, delay: 1 }}
         >
           <TrustStrip />
         </motion.div>

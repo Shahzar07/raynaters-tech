@@ -45,7 +45,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
   ];
 
   return (
-    <main className="relative grain min-h-screen overflow-x-hidden">
+    <main className="relative min-h-screen overflow-x-hidden">
       <JsonLd
         data={[
           breadcrumbSchema(crumbs),
@@ -63,7 +63,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       <div className="border-b border-border bg-surface/60 py-2.5">
         <Container>
           <p className="text-center text-[12px] leading-[1.5] text-text-muted">
-            <span className="mr-1.5 inline-block rounded-[5px] border border-border bg-surface px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] text-text-muted">
+            <span className="mr-1.5 inline-block rounded-none border border-border bg-surface px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] text-text-muted">
               Note
             </span>
             This is a representative case study illustrating the type of results our deployments deliver. Metrics are indicative of typical outcomes. Client details will be updated with verified data as engagements are confirmed.
@@ -73,16 +73,10 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
 
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-border pt-10 pb-14 sm:pt-12 sm:pb-20">
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-          <div
-            className="absolute left-1/2 top-[-25%] h-[520px] w-[1000px] -translate-x-1/2 rounded-full"
-            style={{ background: 'radial-gradient(closest-side, rgba(211,251,163,0.12), transparent 72%)' }}
-          />
-        </div>
         <Container width="grid">
           <Breadcrumbs items={crumbs} />
           <div className="mt-8 flex items-center gap-3">
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[10px] border border-border bg-surface-hover text-[14px] font-medium text-text-primary">
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-none border border-border bg-surface-hover text-[14px] font-medium text-text-primary">
               {study.monogram}
             </span>
             <div>
@@ -95,7 +89,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             </div>
           </div>
           <Reveal delay={0.05}>
-            <h1 className="mt-7 max-w-[18ch] font-display text-balance text-[32px] leading-[1.08] tracking-tightest text-text-primary sm:text-[44px] md:text-[56px] md:leading-[1.03]">
+            <h1 className="mt-7 max-w-[18ch] font-extrabold uppercase text-balance text-[32px] leading-[1.08] tracking-tightest text-text-primary sm:text-[44px] md:text-[56px] md:leading-[1.03]">
               {study.headlineResult}
             </h1>
           </Reveal>
@@ -141,8 +135,8 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-6">
             {study.results.map((r, i) => (
               <Reveal key={i} delay={Math.min(i * 0.06, 0.3)}>
-                <div className="rounded-[16px] border border-border bg-surface p-7 text-center">
-                  <p className="font-display text-[48px] leading-none tracking-[-0.04em] text-accent sm:text-[56px]">
+                <div className="rounded-none border border-border bg-surface p-7 text-center">
+                  <p className="font-extrabold uppercase text-[48px] leading-none tracking-[-0.04em] text-signal sm:text-[56px]">
                     {r.metric}
                   </p>
                   <p className="mt-3 text-[13px] uppercase tracking-[0.14em] text-text-muted">
@@ -155,8 +149,8 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
 
           {/* Quote */}
           <Reveal delay={0.1} className="mt-12 block">
-            <blockquote className="mx-auto max-w-[760px] rounded-[18px] border border-border bg-surface p-7 sm:p-9">
-              <p className="font-display text-pretty text-[22px] italic leading-[1.4] tracking-[-0.01em] text-text-primary sm:text-[26px]">
+            <blockquote className="mx-auto max-w-[760px] rounded-none border border-border bg-surface p-7 sm:p-9">
+              <p className="font-extrabold uppercase text-pretty text-[22px] italic leading-[1.4] tracking-[-0.01em] text-text-primary sm:text-[26px]">
                 &ldquo;{study.quote.text}&rdquo;
               </p>
               <footer className="mt-5 text-[14px] text-text-muted">

@@ -1,4 +1,4 @@
-import { Container } from '@/components/ui/Container';
+﻿import { Container } from '@/components/ui/Container';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Reveal } from '@/components/ui/Reveal';
 import { Check, Minus } from 'lucide-react';
@@ -8,7 +8,7 @@ import type { ComparisonTable as ComparisonTableData } from '@/lib/landing-pages
 function Cell({ value }: { value: string | boolean }) {
   if (typeof value === 'boolean') {
     return value ? (
-      <Check className="mx-auto h-4 w-4 text-accent" strokeWidth={2.5} aria-label="Yes" />
+      <Check className="mx-auto h-4 w-4 text-signal" strokeWidth={2.5} aria-label="Yes" />
     ) : (
       <Minus className="mx-auto h-4 w-4 text-text-muted/60" strokeWidth={2} aria-label="No" />
     );
@@ -32,7 +32,7 @@ export function ComparisonTable({
             <Eyebrow>The honest comparison</Eyebrow>
           </Reveal>
           <Reveal delay={0.05}>
-            <h2 className="mt-5 font-display text-balance text-[28px] leading-[1.1] tracking-[-0.03em] text-text-primary sm:text-[38px] md:text-[46px]">
+            <h2 className="mt-5 font-extrabold uppercase text-balance text-[28px] leading-[1.1] tracking-[-0.03em] text-text-primary sm:text-[38px] md:text-[46px]">
               {heading}
             </h2>
           </Reveal>
@@ -50,7 +50,7 @@ export function ComparisonTable({
                         'p-4 text-[13px] font-medium sm:text-[14px]',
                         i === 0 ? 'text-text-muted' : 'text-center',
                         i === highlightColumn
-                          ? 'rounded-t-[12px] bg-accent/[0.07] text-accent'
+                          ? 'rounded-none bg-accent/30 text-signal'
                           : 'text-text-secondary',
                       )}
                     >
@@ -70,7 +70,7 @@ export function ComparisonTable({
                         key={ci}
                         className={cn(
                           'p-4 text-center text-[14px] sm:text-[15px]',
-                          ci + 1 === highlightColumn && 'bg-accent/[0.05]',
+                          ci + 1 === highlightColumn && 'bg-accent/30',
                           ci + 1 === highlightColumn &&
                             ri === rows.length - 1 &&
                             'rounded-b-[12px]',

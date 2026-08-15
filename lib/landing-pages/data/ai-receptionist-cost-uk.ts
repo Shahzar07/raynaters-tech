@@ -8,8 +8,8 @@ const page: LandingPage = {
   navLabel: 'AI Receptionist Cost',
   navBlurb: 'What an AI receptionist really costs in the UK.',
   image: {
-    src: 'https://d8j0ntlcm91z4.cloudfront.net/user_31J28LgsUCQmK5Ux97L8IuICZIM/hf_20260604_155042_a9b3c028-5991-4ffd-b5db-ea37c9e6c5b6.png',
-    alt: 'AI ROI and savings dashboard showing pound-sterling cost savings and return on investment metrics',
+    src: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80',
+    alt: 'Business owner working through costs and paperwork with a calculator',
   },
 
   eyebrow: 'UK Pricing · 2026',
@@ -84,11 +84,11 @@ const page: LandingPage = {
     ],
   },
 
-  pricingROI: {
+  paybackROI: {
     headline: "The real question isn't cost — it's payback.",
-    body: 'A receptionist that costs £300 a month but recovers £3,000 of bookings is not an expense, it is a return. That is why every Raynaters deployment carries a 90-day payback promise: if it has not paid for itself, we keep building until it does.',
+    body: 'A receptionist that recovers many times over what it takes to run is not an expense, it is a return. That is why every Raynaters deployment carries a 90-day payback promise: if it has not paid for itself, we keep building until it does.',
     bullets: [
-      'Fixed monthly price scoped to your call volume.',
+      'Scoped to your call volume and agreed in writing before we build.',
       'No per-minute meter and no surprise setup fees.',
       'Pay-Back-Or-We-Keep-Building guarantee.',
       'Written ROI projection within 48 hours of your free audit.',
