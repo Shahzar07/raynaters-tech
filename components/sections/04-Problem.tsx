@@ -2,6 +2,7 @@ import { CONTENT } from '@/lib/content';
 import { Container, Section } from '@/components/ui/Container';
 import { Eyebrow, SectionTitle, SectionSub } from '@/components/ui/Eyebrow';
 import { Reveal, RevealStagger } from '@/components/ui/Reveal';
+import { SectionCTA } from '@/components/ui/SectionCTA';
 
 /**
  * Section 2 of the funnel: problem identification.
@@ -44,6 +45,8 @@ export default function Problem() {
             {problem.closer}
           </p>
         </Reveal>
+
+        <SectionCTA label="Find out what it’s costing you" />
       </Container>
     </Section>
   );

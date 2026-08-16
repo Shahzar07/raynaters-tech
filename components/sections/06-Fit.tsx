@@ -3,6 +3,7 @@ import { CONTENT } from '@/lib/content';
 import { Container, Section } from '@/components/ui/Container';
 import { Eyebrow, SectionTitle, SectionSub } from '@/components/ui/Eyebrow';
 import { Reveal } from '@/components/ui/Reveal';
+import { SectionCTA } from '@/components/ui/SectionCTA';
 
 /**
  * The ICP section. This is the one the audit flagged hardest — the site
@@ -74,6 +75,8 @@ export default function Fit() {
             {fit.closer}
           </p>
         </Reveal>
+
+        <SectionCTA label="Find out if you’re a fit" tone="ink" />
       </Container>
     </Section>
   );

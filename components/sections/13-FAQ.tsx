@@ -3,6 +3,7 @@ import { Container, Section } from '@/components/ui/Container';
 import { Eyebrow, SectionTitle } from '@/components/ui/Eyebrow';
 import { Accordion } from '@/components/ui/Accordion';
 import { Reveal } from '@/components/ui/Reveal';
+import { SectionCTA } from '@/components/ui/SectionCTA';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { faqPageSchema } from '@/lib/seo/schema';
 
@@ -35,6 +36,8 @@ export default function FAQ() {
             <Accordion items={faq.items} defaultOpen={0} />
           </Reveal>
         </div>
+
+        <SectionCTA label="Ask yours on the call" />
       </Container>
     </Section>
   );

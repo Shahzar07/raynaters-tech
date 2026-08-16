@@ -4,6 +4,7 @@ import { CONTENT } from '@/lib/content';
 import { Container, Section } from '@/components/ui/Container';
 import { SectionTitle, SectionSub } from '@/components/ui/Eyebrow';
 import { Reveal } from '@/components/ui/Reveal';
+import { SectionCTA } from '@/components/ui/SectionCTA';
 import { cn } from '@/lib/utils';
 
 function Stars({ tone = 'light' }: { tone?: 'light' | 'ink' }) {
@@ -154,6 +155,8 @@ export default function Testimonials() {
             })}
           </div>
         </Reveal>
+
+        <SectionCTA label="Get a result like these" />
       </Container>
     </Section>
   );
