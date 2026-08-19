@@ -39,6 +39,9 @@ export const CONTENT = {
   // ---------------------------------------------------------
   hero: {
     eyebrow: 'For established businesses',
+    // Hero walkthrough video. Drop a new file in /public and point this at it —
+    // nothing else needs to change.
+    videoSrc: '/raynaterstech (1).mp4',
     // Line breaks are authored, not accidental — "need more employees."
     // has to land on one line, so the break goes after "doesn't".
     h1Lines: ['Your business doesn’t', 'need more employees.', 'It needs better AI systems.'],
