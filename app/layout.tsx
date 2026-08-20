@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from 'next/font/google';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/next';
+import { MetaPixel } from '@/components/analytics/MetaPixel';
 import LiveAvatar from '@/components/ui/LiveAvatar';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { organizationSchema, websiteSchema } from '@/lib/seo/schema';
@@ -87,6 +88,9 @@ export default function RootLayout({
             gtag('config', 'G-G2HE3PDF0E');
           `}
         </Script>
+        {/* Meta Pixel — base code + PageView on every client-side navigation */}
+        <MetaPixel />
+
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
         {children}
         <LiveAvatar />
