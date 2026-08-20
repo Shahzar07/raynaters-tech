@@ -2,6 +2,7 @@ import { CONTENT } from '@/lib/content';
 import { Container, Section } from '@/components/ui/Container';
 import { Eyebrow, SectionTitle, SectionSub } from '@/components/ui/Eyebrow';
 import { Reveal, RevealStagger } from '@/components/ui/Reveal';
+import { SectionCTA } from '@/components/ui/SectionCTA';
 
 /**
  * Makes the 90-day promise feel methodical rather than promotional —
@@ -37,6 +38,8 @@ export default function RoiMethod() {
             </div>
           ))}
         </RevealStagger>
+
+        <SectionCTA label="Get your ROI projection" />
       </Container>
     </Section>
   );

@@ -20,7 +20,7 @@ export const CONTENT = {
   },
 
   announcement: {
-    text: 'Taking 6 new Australian builds this month — free 30-minute Agent Audit, no pitch deck',
+    text: 'Taking 6 new builds this month — free 30-minute Agent Audit, ROI in writing, no pitch deck',
   },
 
   nav: {
@@ -38,7 +38,10 @@ export const CONTENT = {
   // 1. HERO — problem + outcome + one CTA + three numbers
   // ---------------------------------------------------------
   hero: {
-    eyebrow: 'For Australian businesses',
+    eyebrow: 'For established businesses',
+    // Hero walkthrough video. Drop a new file in /public and point this at it —
+    // nothing else needs to change.
+    videoSrc: '/raynaterstech (1).mp4',
     // Line breaks are authored, not accidental — "need more employees."
     // has to land on one line, so the break goes after "doesn't".
     h1Lines: ['Your business doesn’t', 'need more employees.', 'It needs better AI systems.'],

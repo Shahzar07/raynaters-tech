@@ -57,38 +57,152 @@ function AnimatedHeadline() {
 
 function HeroVideo() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+  /**
+   * Sound is on by default. Browsers refuse audible autoplay until the user
+   * has interacted with the page, so this flips to `true` at runtime whenever
+   * that refusal happens — see `play()` below.
+   */
+  const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
+  /** Set once the viewer works the mute button, so autoplay stops overriding them. */
+  const mutePreferenceRef = useRef<boolean | null>(null);
+  /** Set when the viewer pauses by hand, so scrolling back doesn't restart it. */
+  const pausedByViewerRef = useRef(false);
+  /**
+   * Whether the video is currently *meant* to be running. `play()` resolves
+   * asynchronously, so without this a viewer who scrolls past mid-start gets
+   * the fallback restarting the video off-screen.
+   */
+  const shouldPlayRef = useRef(false);
 
+  // Keep the element in step with React state. The `muted` prop alone is not
+  // reliable — React does not always reflect it onto the DOM node.
   useEffect(() => {
-    const timer = setTimeout(() => {
-      videoRef.current
-        ?.play()
-        .then(() => setIsPlaying(true))
-        .catch(() => setIsPlaying(false));
-    }, 4000);
-    return () => clearTimeout(timer);
+    const v = videoRef.current;
+    if (v) v.muted = isMuted;
+  }, [isMuted]);
+
+  /**
+   * Play while the frame is on screen, pause as soon as it leaves. Audible
+   * playback is attempted first and falls back to muted rather than failing
+   * silently, so the video always runs even when the browser blocks sound.
+   */
+  useEffect(() => {
+    const frame = frameRef.current;
+    const v = videoRef.current;
+    if (!frame || !v) return;
+
+    const play = async () => {
+      const wantMuted = mutePreferenceRef.current ?? false;
+      try {
+        v.muted = wantMuted;
+        await v.play();
+        // Scrolled away while the play promise was still pending.
+        if (!shouldPlayRef.current) {
+          v.pause();
+          return;
+        }
+        setIsMuted(wantMuted);
+        setIsPlaying(true);
+        return;
+      } catch {
+        // Audible autoplay refused — fall through to a muted attempt.
+      }
+      // Only retry if the frame is still on screen. Without this the fallback
+      // fires on the AbortError raised by our own pause() and restarts the
+      // video after the viewer has already scrolled past it.
+      if (!shouldPlayRef.current) return;
+      try {
+        v.muted = true;
+        await v.play();
+        if (!shouldPlayRef.current) {
+          v.pause();
+          return;
+        }
+        setIsMuted(true);
+        setIsPlaying(true);
+      } catch {
+        setIsPlaying(false);
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          shouldPlayRef.current = true;
+          if (!pausedByViewerRef.current) void play();
+        } else {
+          shouldPlayRef.current = false;
+          v.pause();
+          setIsPlaying(false);
+        }
+      },
+      // Two-fifths on screen: enough that the video is genuinely being looked
+      // at before it starts making noise.
+      { threshold: 0.4 },
+    );
+
+    observer.observe(frame);
+    return () => observer.disconnect();
+  }, []);
+
+  /**
+   * The browser grants audible playback after the first real interaction, so
+   * retry once the viewer touches the page — this is what actually delivers
+   * sound-on-by-default for anyone whose browser blocked it at load.
+   */
+  useEffect(() => {
+    const detach = () => {
+      window.removeEventListener('pointerdown', unlock);
+      window.removeEventListener('keydown', unlock);
+    };
+    function unlock() {
+      const v = videoRef.current;
+      // Never override a viewer who has worked the mute button themselves.
+      if (v && mutePreferenceRef.current === null && v.muted) {
+        // Safe to do while paused too — it just means sound is on next play.
+        v.muted = false;
+        setIsMuted(false);
+      }
+      detach();
+    }
+    // Deliberately not `{ once: true }`: the handler can decline to act, and
+    // a one-shot listener would burn the only gesture we get.
+    window.addEventListener('pointerdown', unlock);
+    window.addEventListener('keydown', unlock);
+    return detach;
   }, []);
 
   const togglePlay = (e: React.MouseEvent) => {
     e.stopPropagation();
     const v = videoRef.current;
     if (!v) return;
-    if (isPlaying) v.pause();
-    else void v.play();
-    setIsPlaying(!isPlaying);
+    if (isPlaying) {
+      pausedByViewerRef.current = true;
+      shouldPlayRef.current = false;
+      v.pause();
+      setIsPlaying(false);
+    } else {
+      pausedByViewerRef.current = false;
+      shouldPlayRef.current = true;
+      void v.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+    }
   };
 
   const toggleMute = (e: React.MouseEvent) => {
     e.stopPropagation();
     const v = videoRef.current;
     if (!v) return;
-    v.muted = !isMuted;
-    setIsMuted(!isMuted);
+    const next = !isMuted;
+    mutePreferenceRef.current = next;
+    v.muted = next;
+    setIsMuted(next);
   };
 
   return (
     <motion.div
+      ref={frameRef}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: TOKENS.motion.ease, delay: 0.5 }}
@@ -99,8 +213,14 @@ function HeroVideo() {
         Live system walkthrough
       </div>
       <div className="aspect-video w-full overflow-hidden">
-        <video ref={videoRef} muted={isMuted} loop playsInline className="h-full w-full object-cover">
-          <source src="/raynaterstech (1).mp4" type="video/mp4" />
+        <video
+          ref={videoRef}
+          loop
+          playsInline
+          preload="metadata"
+          className="h-full w-full object-cover"
+        >
+          <source src={CONTENT.hero.videoSrc} type="video/mp4" />
         </video>
       </div>
 

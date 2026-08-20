@@ -4,6 +4,7 @@ import { CONTENT } from '@/lib/content';
 import { Container, Section } from '@/components/ui/Container';
 import { Eyebrow, SectionTitle, SectionSub } from '@/components/ui/Eyebrow';
 import { Reveal, RevealStagger } from '@/components/ui/Reveal';
+import { SectionCTA } from '@/components/ui/SectionCTA';
 import { cn } from '@/lib/utils';
 
 /**
@@ -90,6 +91,8 @@ export default function Proof() {
             />
           </Link>
         </Reveal>
+
+        <SectionCTA label="Get numbers for your business" />
       </Container>
     </Section>
   );

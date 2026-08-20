@@ -3,6 +3,7 @@ import { CONTENT } from '@/lib/content';
 import { Container, Section } from '@/components/ui/Container';
 import { Eyebrow, SectionTitle, SectionSub } from '@/components/ui/Eyebrow';
 import { Reveal } from '@/components/ui/Reveal';
+import { SectionCTA } from '@/components/ui/SectionCTA';
 import { cn } from '@/lib/utils';
 
 /**
@@ -76,6 +77,8 @@ export default function Automate() {
             </Reveal>
           ))}
         </div>
+
+        <SectionCTA label="See what we’d automate first" />
       </Container>
     </Section>
   );

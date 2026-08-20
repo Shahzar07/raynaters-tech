@@ -77,7 +77,7 @@ export default function AboutPage() {
               <Eyebrow>About Raynaters</Eyebrow>
             </Reveal>
             <Reveal delay={0.05}>
-              <h1 className="mt-5 text-balance text-[34px] font-extrabold uppercase leading-[1.06] tracking-tightest text-text-primary sm:text-[50px] md:text-[62px] md:leading-[1.02]">
+              <h1 className="mt-5 text-balance text-[37px] font-extrabold uppercase leading-[1.06] tracking-tightest text-text-primary min-[400px]:text-[44px] sm:text-[50px] md:text-[62px] md:leading-[1.02]">
                 We don’t sell AI. We sell the hours it gives back.
               </h1>
             </Reveal>

@@ -55,7 +55,7 @@ export default function BookPage() {
               Six builds a month · Free · No obligation
             </span>
 
-            <h1 className="mt-6 text-balance text-[30px] font-extrabold uppercase leading-[1.06] tracking-[-0.05em] text-text-primary sm:text-[46px] md:text-[58px]">
+            <h1 className="mt-6 text-balance text-[36px] font-extrabold uppercase leading-[1.06] tracking-[-0.05em] text-text-primary min-[400px]:text-[42px] sm:text-[46px] md:text-[58px]">
               Pick a time. Find out what your business
               <span className="mark-accent"> can run without you.</span>
             </h1>

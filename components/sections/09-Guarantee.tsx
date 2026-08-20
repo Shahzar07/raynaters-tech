@@ -2,6 +2,7 @@ import { CONTENT } from '@/lib/content';
 import { Container, Section } from '@/components/ui/Container';
 import { Eyebrow, SectionTitle } from '@/components/ui/Eyebrow';
 import { Reveal } from '@/components/ui/Reveal';
+import { SectionCTA } from '@/components/ui/SectionCTA';
 
 export default function Guarantee() {
   const { guarantee } = CONTENT;
@@ -37,6 +38,8 @@ export default function Guarantee() {
             ))}
           </Reveal>
         </div>
+
+        <SectionCTA label="Take the risk-free call" />
       </Container>
     </Section>
   );

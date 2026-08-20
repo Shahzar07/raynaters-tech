@@ -6,6 +6,7 @@ import { CONTENT } from '@/lib/content';
 import { Container, Section } from '@/components/ui/Container';
 import { Eyebrow, SectionTitle, SectionSub } from '@/components/ui/Eyebrow';
 import { Reveal, RevealStagger } from '@/components/ui/Reveal';
+import { SectionCTA } from '@/components/ui/SectionCTA';
 import { cn } from '@/lib/utils';
 
 const fmt = (s: number) => {
@@ -249,6 +250,8 @@ export default function VideoTestimonials() {
             Recorded on their own phones · Nothing scripted, nothing edited
           </p>
         </Reveal>
+
+        <SectionCTA label="See if yours is next" />
       </Container>
     </Section>
   );
