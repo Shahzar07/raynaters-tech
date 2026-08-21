@@ -78,11 +78,14 @@ export default function RootLayout({
       lang="en-AU"
       className={`${jakarta.variable} ${boldonse.variable}`}
     >
-      {/* Google Tag Manager — inlined at the top of <head> by `beforeInteractive` */}
-      <GoogleTagManager />
       <body className="font-sans bg-bg text-text-primary antialiased">
         {/* Google Tag Manager (noscript) — must stay the first child of <body> */}
         <GoogleTagManagerNoScript />
+        {/* Google Tag Manager. Lives inside <body> because a <script> is not
+            valid as a direct child of <html> — React refuses to hydrate that
+            and re-renders the whole page on the client. `beforeInteractive`
+            hoists it into <head> regardless of where it is written. */}
+        <GoogleTagManager />
 
         {/* Google tag (gtag.js) — Google Analytics 4 */}
         <Script

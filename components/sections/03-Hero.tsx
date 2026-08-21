@@ -8,6 +8,13 @@ import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { Marquee } from '@/components/ui/Marquee';
 import { TOKENS } from '@/lib/design-tokens';
+import {
+  chromelessPlayerVars,
+  loadYouTubeApi,
+  youTubePoster,
+  YT_STATE,
+  type YouTubePlayer,
+} from '@/lib/youtube';
 import { cn } from '@/lib/utils';
 
 const wordContainer = {
@@ -55,87 +62,105 @@ function AnimatedHeadline() {
   );
 }
 
+/** Announced on the embedded frame, in place of "YouTube video player". */
+const VIDEO_TITLE = 'Live system walkthrough — Raynaters Tech';
+
+/**
+ * The hero walkthrough, played through YouTube but wearing none of YouTube's
+ * clothes: no control bar, no title card, no end screen, no click-through to
+ * youtube.com. The frame gets the site's own play and mute chrome instead,
+ * and the video runs on a loop.
+ *
+ * Pointer events are off on the embed itself, which is what keeps YouTube's
+ * hover UI from ever appearing — every click lands on this component.
+ */
 function HeroVideo() {
   const [isPlaying, setIsPlaying] = useState(false);
   /**
-   * Sound is on by default. Browsers refuse audible autoplay until the user
-   * has interacted with the page, so this flips to `true` at runtime whenever
-   * that refusal happens — see `play()` below.
+   * Sound is on as soon as the browser permits it. Autoplay is only granted
+   * to muted playback, so the video starts silent and unmutes on the first
+   * interaction anywhere on the page — see the unlock effect below.
    */
-  const [isMuted, setIsMuted] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
+  /** The still stays up until the first frame is genuinely playing. */
+  const [hasStarted, setHasStarted] = useState(false);
+
+  const playerRef = useRef<YouTubePlayer | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
-  /** Set once the viewer works the mute button, so autoplay stops overriding them. */
+  /** Set once the viewer works the mute button, so nothing overrides them. */
   const mutePreferenceRef = useRef<boolean | null>(null);
   /** Set when the viewer pauses by hand, so scrolling back doesn't restart it. */
   const pausedByViewerRef = useRef(false);
-  /**
-   * Whether the video is currently *meant* to be running. `play()` resolves
-   * asynchronously, so without this a viewer who scrolls past mid-start gets
-   * the fallback restarting the video off-screen.
-   */
+  /** Whether the video is currently *meant* to be running. */
   const shouldPlayRef = useRef(false);
+  /** The page has had a real interaction, so audible playback is allowed. */
+  const gestureSeenRef = useRef(false);
 
-  // Keep the element in step with React state. The `muted` prop alone is not
-  // reliable — React does not always reflect it onto the DOM node.
+  // Build the player. The API replaces the element it is handed with its own
+  // iframe, so it gets a plain DOM node created here rather than a React one —
+  // React must not be left reconciling a child that YouTube has swapped out.
   useEffect(() => {
-    const v = videoRef.current;
-    if (v) v.muted = isMuted;
-  }, [isMuted]);
+    const container = containerRef.current;
+    if (!container) return;
 
-  /**
-   * Play while the frame is on screen, pause as soon as it leaves. Audible
-   * playback is attempted first and falls back to muted rather than failing
-   * silently, so the video always runs even when the browser blocks sound.
-   */
+    let cancelled = false;
+    const host = document.createElement('div');
+    container.appendChild(host);
+
+    void loadYouTubeApi().then((YT) => {
+      if (cancelled) return;
+      playerRef.current = new YT.Player(host, {
+        videoId: CONTENT.hero.videoId,
+        playerVars: chromelessPlayerVars(CONTENT.hero.videoId),
+        events: {
+          onReady: ({ target }) => {
+            target.getIframe().setAttribute('title', VIDEO_TITLE);
+            if (gestureSeenRef.current && mutePreferenceRef.current === null) {
+              target.unMute();
+              setIsMuted(false);
+            }
+            // The frame may already have scrolled into view while the API
+            // was still loading.
+            if (shouldPlayRef.current && !pausedByViewerRef.current) target.playVideo();
+          },
+          onStateChange: ({ data, target }) => {
+            if (data === YT_STATE.PLAYING) {
+              setIsPlaying(true);
+              setHasStarted(true);
+            } else if (data === YT_STATE.PAUSED) {
+              setIsPlaying(false);
+            } else if (data === YT_STATE.ENDED) {
+              // Straight back to the top: the walkthrough runs on a loop.
+              target.seekTo(0, true);
+              target.playVideo();
+            }
+          },
+        },
+      });
+    });
+
+    return () => {
+      cancelled = true;
+      playerRef.current?.destroy();
+      playerRef.current = null;
+      container.replaceChildren();
+    };
+  }, []);
+
+  /** Play while the frame is on screen, pause as soon as it leaves. */
   useEffect(() => {
     const frame = frameRef.current;
-    const v = videoRef.current;
-    if (!frame || !v) return;
-
-    const play = async () => {
-      const wantMuted = mutePreferenceRef.current ?? false;
-      try {
-        v.muted = wantMuted;
-        await v.play();
-        // Scrolled away while the play promise was still pending.
-        if (!shouldPlayRef.current) {
-          v.pause();
-          return;
-        }
-        setIsMuted(wantMuted);
-        setIsPlaying(true);
-        return;
-      } catch {
-        // Audible autoplay refused — fall through to a muted attempt.
-      }
-      // Only retry if the frame is still on screen. Without this the fallback
-      // fires on the AbortError raised by our own pause() and restarts the
-      // video after the viewer has already scrolled past it.
-      if (!shouldPlayRef.current) return;
-      try {
-        v.muted = true;
-        await v.play();
-        if (!shouldPlayRef.current) {
-          v.pause();
-          return;
-        }
-        setIsMuted(true);
-        setIsPlaying(true);
-      } catch {
-        setIsPlaying(false);
-      }
-    };
+    if (!frame) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           shouldPlayRef.current = true;
-          if (!pausedByViewerRef.current) void play();
+          if (!pausedByViewerRef.current) playerRef.current?.playVideo();
         } else {
           shouldPlayRef.current = false;
-          v.pause();
-          setIsPlaying(false);
+          playerRef.current?.pauseVideo();
         }
       },
       // Two-fifths on screen: enough that the video is genuinely being looked
@@ -148,9 +173,9 @@ function HeroVideo() {
   }, []);
 
   /**
-   * The browser grants audible playback after the first real interaction, so
-   * retry once the viewer touches the page — this is what actually delivers
-   * sound-on-by-default for anyone whose browser blocked it at load.
+   * Browsers grant audible playback after the first real interaction, so the
+   * sound comes on then — this is what delivers sound-on-by-default without
+   * ever costing us the autoplay itself.
    */
   useEffect(() => {
     const detach = () => {
@@ -158,11 +183,11 @@ function HeroVideo() {
       window.removeEventListener('keydown', unlock);
     };
     function unlock() {
-      const v = videoRef.current;
+      gestureSeenRef.current = true;
       // Never override a viewer who has worked the mute button themselves.
-      if (v && mutePreferenceRef.current === null && v.muted) {
-        // Safe to do while paused too — it just means sound is on next play.
-        v.muted = false;
+      if (mutePreferenceRef.current === null) {
+        // Harmless before the player exists: onReady applies it instead.
+        playerRef.current?.unMute();
         setIsMuted(false);
       }
       detach();
@@ -176,27 +201,27 @@ function HeroVideo() {
 
   const togglePlay = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const v = videoRef.current;
-    if (!v) return;
+    const player = playerRef.current;
+    if (!player) return;
     if (isPlaying) {
       pausedByViewerRef.current = true;
       shouldPlayRef.current = false;
-      v.pause();
-      setIsPlaying(false);
+      player.pauseVideo();
     } else {
       pausedByViewerRef.current = false;
       shouldPlayRef.current = true;
-      void v.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+      player.playVideo();
     }
   };
 
   const toggleMute = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const v = videoRef.current;
-    if (!v) return;
+    const player = playerRef.current;
+    if (!player) return;
     const next = !isMuted;
     mutePreferenceRef.current = next;
-    v.muted = next;
+    if (next) player.mute();
+    else player.unMute();
     setIsMuted(next);
   };
 
@@ -212,16 +237,26 @@ function HeroVideo() {
       <div className="absolute -top-[1px] left-4 z-10 -translate-y-1/2 bg-ink px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.14em] text-text-on-ink sm:left-6 sm:text-[11px]">
         Live system walkthrough
       </div>
-      <div className="aspect-video w-full overflow-hidden">
-        <video
-          ref={videoRef}
-          loop
-          playsInline
-          preload="metadata"
-          className="h-full w-full object-cover"
-        >
-          <source src={CONTENT.hero.videoSrc} type="video/mp4" />
-        </video>
+      <div className="relative aspect-video w-full overflow-hidden bg-ink">
+        <div
+          ref={containerRef}
+          className="pointer-events-none absolute inset-0 [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:h-full [&>iframe]:w-full [&>iframe]:border-0"
+        />
+        {/* Holds the frame while the player loads, so the embed never shows
+            its own poster state — and fades out once playback is under way. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={youTubePoster(CONTENT.hero.videoId)}
+          alt=""
+          aria-hidden
+          onError={(e) => {
+            e.currentTarget.src = `https://i.ytimg.com/vi/${CONTENT.hero.videoId}/hqdefault.jpg`;
+          }}
+          className={cn(
+            'pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-700',
+            hasStarted ? 'opacity-0' : 'opacity-100',
+          )}
+        />
       </div>
 
       <div className="absolute bottom-3 right-3 flex items-center gap-2 opacity-100 transition-opacity duration-300 sm:bottom-5 sm:right-5 sm:gap-3 sm:opacity-0 sm:group-hover:opacity-100">
