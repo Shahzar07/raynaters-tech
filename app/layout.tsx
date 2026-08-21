@@ -4,6 +4,10 @@ import localFont from 'next/font/local';
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/next';
 import { MetaPixel } from '@/components/analytics/MetaPixel';
+import {
+  GoogleTagManager,
+  GoogleTagManagerNoScript,
+} from '@/components/analytics/GoogleTagManager';
 import LiveAvatar from '@/components/ui/LiveAvatar';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { organizationSchema, websiteSchema } from '@/lib/seo/schema';
@@ -74,7 +78,12 @@ export default function RootLayout({
       lang="en-AU"
       className={`${jakarta.variable} ${boldonse.variable}`}
     >
+      {/* Google Tag Manager — inlined at the top of <head> by `beforeInteractive` */}
+      <GoogleTagManager />
       <body className="font-sans bg-bg text-text-primary antialiased">
+        {/* Google Tag Manager (noscript) — must stay the first child of <body> */}
+        <GoogleTagManagerNoScript />
+
         {/* Google tag (gtag.js) — Google Analytics 4 */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-G2HE3PDF0E"
