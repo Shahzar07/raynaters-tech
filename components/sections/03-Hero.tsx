@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { CONTENT } from '@/lib/content';
@@ -10,6 +10,7 @@ import { Marquee } from '@/components/ui/Marquee';
 import { TOKENS } from '@/lib/design-tokens';
 import {
   chromelessPlayerVars,
+  disableCaptions,
   loadYouTubeApi,
   youTubePoster,
   YT_STATE,
@@ -77,11 +78,11 @@ const VIDEO_TITLE = 'Live system walkthrough — Raynaters Tech';
 function HeroVideo() {
   const [isPlaying, setIsPlaying] = useState(false);
   /**
-   * Sound is on as soon as the browser permits it. Autoplay is only granted
-   * to muted playback, so the video starts silent and unmutes on the first
-   * interaction anywhere on the page — see the unlock effect below.
+   * Sound is on by default. Browsers refuse audible autoplay until the page
+   * has been interacted with, so this flips to `true` at runtime whenever
+   * that refusal happens — see `startPlayback` below.
    */
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   /** The still stays up until the first frame is genuinely playing. */
   const [hasStarted, setHasStarted] = useState(false);
 
@@ -94,8 +95,39 @@ function HeroVideo() {
   const pausedByViewerRef = useRef(false);
   /** Whether the video is currently *meant* to be running. */
   const shouldPlayRef = useRef(false);
-  /** The page has had a real interaction, so audible playback is allowed. */
-  const gestureSeenRef = useRef(false);
+  /** Playback state, read inside timers where React state would be stale. */
+  const isPlayingRef = useRef(false);
+  /** Pending muted retry, armed whenever audible playback is attempted. */
+  const audibleFallbackRef = useRef<number | undefined>(undefined);
+
+  /**
+   * Start the video with sound, and settle for muted only if the browser
+   * refuses. A blocked audible autoplay does not throw and does not fall back
+   * on its own — the player simply never starts — so the only way to tell is
+   * to look a moment later and see whether anything is running.
+   */
+  const startPlayback = useCallback(() => {
+    const player = playerRef.current;
+    if (!player) return;
+
+    const wantMuted = mutePreferenceRef.current ?? false;
+    if (wantMuted) player.mute();
+    else player.unMute();
+    setIsMuted(wantMuted);
+    player.playVideo();
+
+    window.clearTimeout(audibleFallbackRef.current);
+    if (wantMuted) return;
+    audibleFallbackRef.current = window.setTimeout(() => {
+      const p = playerRef.current;
+      if (!p || isPlayingRef.current || !shouldPlayRef.current) return;
+      // Never override a viewer who has worked the mute button themselves.
+      if (mutePreferenceRef.current !== null) return;
+      p.mute();
+      setIsMuted(true);
+      p.playVideo();
+    }, 1200);
+  }, []);
 
   // Build the player. The API replaces the element it is handed with its own
   // iframe, so it gets a plain DOM node created here rather than a React one —
@@ -116,19 +148,20 @@ function HeroVideo() {
         events: {
           onReady: ({ target }) => {
             target.getIframe().setAttribute('title', VIDEO_TITLE);
-            if (gestureSeenRef.current && mutePreferenceRef.current === null) {
-              target.unMute();
-              setIsMuted(false);
-            }
+            disableCaptions(target);
             // The frame may already have scrolled into view while the API
             // was still loading.
-            if (shouldPlayRef.current && !pausedByViewerRef.current) target.playVideo();
+            if (shouldPlayRef.current && !pausedByViewerRef.current) startPlayback();
           },
           onStateChange: ({ data, target }) => {
             if (data === YT_STATE.PLAYING) {
+              // Captions load with the stream, so they have to go again here.
+              disableCaptions(target);
+              isPlayingRef.current = true;
               setIsPlaying(true);
               setHasStarted(true);
             } else if (data === YT_STATE.PAUSED) {
+              isPlayingRef.current = false;
               setIsPlaying(false);
             } else if (data === YT_STATE.ENDED) {
               // Straight back to the top: the walkthrough runs on a loop.
@@ -142,11 +175,12 @@ function HeroVideo() {
 
     return () => {
       cancelled = true;
+      window.clearTimeout(audibleFallbackRef.current);
       playerRef.current?.destroy();
       playerRef.current = null;
       container.replaceChildren();
     };
-  }, []);
+  }, [startPlayback]);
 
   /** Play while the frame is on screen, pause as soon as it leaves. */
   useEffect(() => {
@@ -157,9 +191,10 @@ function HeroVideo() {
       ([entry]) => {
         if (entry.isIntersecting) {
           shouldPlayRef.current = true;
-          if (!pausedByViewerRef.current) playerRef.current?.playVideo();
+          if (!pausedByViewerRef.current) startPlayback();
         } else {
           shouldPlayRef.current = false;
+          window.clearTimeout(audibleFallbackRef.current);
           playerRef.current?.pauseVideo();
         }
       },
@@ -170,12 +205,12 @@ function HeroVideo() {
 
     observer.observe(frame);
     return () => observer.disconnect();
-  }, []);
+  }, [startPlayback]);
 
   /**
-   * Browsers grant audible playback after the first real interaction, so the
-   * sound comes on then — this is what delivers sound-on-by-default without
-   * ever costing us the autoplay itself.
+   * The browser grants audible playback after the first real interaction, so
+   * the sound comes back on then — this is what recovers sound for anyone
+   * whose browser blocked it at load, without ever costing us the autoplay.
    */
   useEffect(() => {
     const detach = () => {
@@ -183,12 +218,15 @@ function HeroVideo() {
       window.removeEventListener('keydown', unlock);
     };
     function unlock() {
-      gestureSeenRef.current = true;
+      const player = playerRef.current;
       // Never override a viewer who has worked the mute button themselves.
-      if (mutePreferenceRef.current === null) {
-        // Harmless before the player exists: onReady applies it instead.
-        playerRef.current?.unMute();
+      if (player && mutePreferenceRef.current === null) {
+        player.unMute();
         setIsMuted(false);
+        // Audible autoplay may have been refused outright at load.
+        if (shouldPlayRef.current && !pausedByViewerRef.current && !isPlayingRef.current) {
+          player.playVideo();
+        }
       }
       detach();
     }
@@ -206,11 +244,14 @@ function HeroVideo() {
     if (isPlaying) {
       pausedByViewerRef.current = true;
       shouldPlayRef.current = false;
+      window.clearTimeout(audibleFallbackRef.current);
       player.pauseVideo();
     } else {
       pausedByViewerRef.current = false;
       shouldPlayRef.current = true;
-      player.playVideo();
+      // A click is the interaction browsers were holding out for, so this
+      // one plays with sound.
+      startPlayback();
     }
   };
 
@@ -257,9 +298,14 @@ function HeroVideo() {
             hasStarted ? 'opacity-0' : 'opacity-100',
           )}
         />
+        {/* Swallows every pointer event before it can reach the embed. The
+            player never sees a hover, so its title bar, channel name, share
+            and watch-later buttons have nothing to appear for; the click
+            still bubbles to the frame's own play toggle. */}
+        <div aria-hidden className="absolute inset-0 z-[1]" />
       </div>
 
-      <div className="absolute bottom-3 right-3 flex items-center gap-2 opacity-100 transition-opacity duration-300 sm:bottom-5 sm:right-5 sm:gap-3 sm:opacity-0 sm:group-hover:opacity-100">
+      <div className="absolute bottom-3 right-3 z-20 flex items-center gap-2 opacity-100 transition-opacity duration-300 sm:bottom-5 sm:right-5 sm:gap-3 sm:opacity-0 sm:group-hover:opacity-100">
         <button
           onClick={toggleMute}
           className="grid h-10 w-10 place-items-center border-2 border-ink bg-bg text-ink transition-colors hover:bg-accent"

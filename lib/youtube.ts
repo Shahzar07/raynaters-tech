@@ -14,6 +14,8 @@ export interface YouTubePlayer {
   unMute(): void;
   seekTo(seconds: number, allowSeekAhead: boolean): void;
   getIframe(): HTMLIFrameElement;
+  /** Player modules — 'captions' (Flash-era name) and 'cc' (HTML5 name). */
+  unloadModule(module: string): void;
   destroy(): void;
 }
 
@@ -99,9 +101,10 @@ export function chromelessPlayerVars(videoId: string): Record<string, string | n
     playsinline: 1,
     loop: 1,
     playlist: videoId,
-    // Muted start is the only autoplay browsers allow; sound comes back on
-    // the viewer's first interaction with the page.
-    mute: 1,
+    // Start audible. Browsers refuse audible autoplay until the page has been
+    // interacted with, so the player falls back to muted when that happens —
+    // see `startPlayback` in the hero.
+    mute: 0,
     origin: typeof window === 'undefined' ? '' : window.location.origin,
   };
 }
@@ -109,4 +112,25 @@ export function chromelessPlayerVars(videoId: string): Record<string, string | n
 /** Highest-resolution still YouTube publishes for a video. */
 export function youTubePoster(videoId: string): string {
   return `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+}
+
+/**
+ * Turn subtitles off and keep them off.
+ *
+ * `cc_load_policy: 0` only means "use the viewer's default", so anyone whose
+ * YouTube account has captions switched on — or any video YouTube decides to
+ * auto-caption — still gets them burned over the frame. Unloading the caption
+ * module is the only thing that actually suppresses them, and it has to be
+ * done again once playback starts, because the module is loaded with the
+ * stream. Both module names are tried: the player answers to one or the other
+ * depending on which build is served.
+ */
+export function disableCaptions(player: YouTubePlayer): void {
+  for (const module of ['captions', 'cc']) {
+    try {
+      player.unloadModule(module);
+    } catch {
+      // Module not present in this player build — nothing to unload.
+    }
+  }
 }
