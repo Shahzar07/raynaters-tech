@@ -8,7 +8,7 @@ import {
   GoogleTagManager,
   GoogleTagManagerNoScript,
 } from '@/components/analytics/GoogleTagManager';
-import LiveAvatar from '@/components/ui/LiveAvatar';
+import LeadConnectorChat from '@/components/ui/LeadConnectorChat';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { organizationSchema, websiteSchema } from '@/lib/seo/schema';
 import { SITE_URL, SITE_NAME } from '@/lib/seo/meta';
@@ -102,7 +102,7 @@ export default function RootLayout({
 
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
         {children}
-        <LiveAvatar />
+        <LeadConnectorChat />
         <Analytics />
       </body>
     </html>
