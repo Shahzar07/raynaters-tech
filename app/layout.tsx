@@ -8,6 +8,7 @@ import {
   GoogleTagManager,
   GoogleTagManagerNoScript,
 } from '@/components/analytics/GoogleTagManager';
+import { Umami } from '@/components/analytics/Umami';
 import LiveAvatar from '@/components/ui/LiveAvatar';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { organizationSchema, websiteSchema } from '@/lib/seo/schema';
@@ -80,6 +81,8 @@ export default function RootLayout({
     >
       {/* Google Tag Manager — inlined at the top of <head> by `beforeInteractive` */}
       <GoogleTagManager />
+      {/* Umami — rendered into <head> by `beforeInteractive` */}
+      <Umami />
       <body className="font-sans bg-bg text-text-primary antialiased">
         {/* Google Tag Manager (noscript) — must stay the first child of <body> */}
         <GoogleTagManagerNoScript />
