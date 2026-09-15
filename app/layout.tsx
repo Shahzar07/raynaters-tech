@@ -8,7 +8,7 @@ import {
   GoogleTagManager,
   GoogleTagManagerNoScript,
 } from '@/components/analytics/GoogleTagManager';
-import LiveAvatar from '@/components/ui/LiveAvatar';
+import { LeadConnectorWidget } from '@/components/ui/LeadConnectorWidget';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { organizationSchema, websiteSchema } from '@/lib/seo/schema';
 import { SITE_URL, SITE_NAME } from '@/lib/seo/meta';
@@ -101,7 +101,8 @@ export default function RootLayout({
 
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
         {children}
-        <LiveAvatar />
+        {/* AI assistant — LeadConnector renders its own floating bubble */}
+        <LeadConnectorWidget />
         <Analytics />
       </body>
     </html>
