@@ -9,6 +9,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { MediaFrame } from '@/components/ui/MediaFrame';
 import { LandingFinalCTA } from '@/components/landing/LandingFinalCTA';
 import { CaseStudyCard } from '@/components/case-studies/CaseStudyCard';
+import { KeepReading } from '@/components/ui/KeepReading';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { pageMetadata, absUrl } from '@/lib/seo/meta';
 import { breadcrumbSchema, articleSchema } from '@/lib/seo/schema';
@@ -176,6 +177,11 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           </Container>
         </section>
       )}
+
+      <KeepReading
+        eyebrow="Keep reading"
+        title="How we decide what to automate first."
+      />
 
       <LandingFinalCTA
         title="Want a result like this?"

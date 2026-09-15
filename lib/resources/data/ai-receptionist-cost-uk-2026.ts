@@ -173,6 +173,10 @@ const resource: Resource = {
   related: [
     { label: 'Compare AI receptionist pricing & options', href: '/ai-receptionist-cost-uk' },
     { label: 'See our AI receptionist for UK clinics', href: '/ai-receptionist-for-clinics-uk' },
+    { label: 'AI receptionist for trades and field service', href: '/ai-receptionist-for-trades-uk' },
+    { label: 'The best AI receptionist in 2026, every option compared', href: '/resources/best-ai-receptionist-compared-2026' },
+    { label: 'What to automate first in a service business', href: '/resources/automate-first-trades-uk' },
+    { label: 'Book a free Agent Audit', href: '/book' },
   ],
 
   metadata: {

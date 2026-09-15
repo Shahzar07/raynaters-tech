@@ -3,11 +3,25 @@ import Link from 'next/link';
 import { CONTENT } from '@/lib/content';
 import { Container } from '@/components/ui/Container';
 import { LANDING_PAGES } from '@/lib/landing-pages';
+import { RESOURCES } from '@/lib/resources';
 
 const solutionsColumn = {
   label: 'By industry',
   links: LANDING_PAGES.map((p) => ({ label: p.navLabel, href: `/${p.slug}` })),
 };
+
+/**
+ * The guides live in their own full-width shelf rather than a fifth column —
+ * their titles are sentences, and a 12%-wide column shreds them. It also
+ * means every page on the site links to every guide, which is the point:
+ * the guides carry the informational keywords and had almost nothing
+ * pointing at them before.
+ */
+const guideLinks = RESOURCES.map((r) => ({
+  label: r.title,
+  href: `/resources/${r.slug}`,
+  category: r.category,
+}));
 
 export default function Footer() {
   const { footer, brand } = CONTENT;
@@ -59,7 +73,27 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 border-t-2 border-bg/15 pt-6">
+        <div className="mt-14 border-t-2 border-bg/15 pt-9">
+          <p className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-accent">
+            Guides
+          </p>
+          <ul className="mt-5 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
+            {guideLinks.map((g) => (
+              <li key={g.href}>
+                <Link href={g.href} className="group block">
+                  <span className="block text-[10px] font-extrabold uppercase tracking-[0.16em] text-bg/40">
+                    {g.category}
+                  </span>
+                  <span className="mt-1.5 block text-pretty text-[13px] font-medium leading-[1.45] text-bg/65 transition-colors group-hover:text-bg">
+                    {g.label}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-12 border-t-2 border-bg/15 pt-6">
           <div className="flex flex-col items-start justify-between gap-3 text-[11px] font-bold uppercase tracking-[0.08em] text-bg/60 md:flex-row md:items-center">
             <p>{footer.copyright}</p>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
