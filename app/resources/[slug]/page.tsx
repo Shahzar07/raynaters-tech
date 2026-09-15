@@ -13,6 +13,7 @@ import { DirectAnswerBlock } from '@/components/landing/DirectAnswerBlock';
 import { ArticleBody } from '@/components/resources/ArticleBody';
 import { MediaFrame } from '@/components/ui/MediaFrame';
 import { LandingFinalCTA } from '@/components/landing/LandingFinalCTA';
+import { KeepReading } from '@/components/ui/KeepReading';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { pageMetadata, absUrl } from '@/lib/seo/meta';
 import { breadcrumbSchema, articleSchema, faqPageSchema } from '@/lib/seo/schema';
@@ -139,6 +140,12 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
           )}
         </Container>
       </section>
+
+      <KeepReading
+        eyebrow="Keep reading"
+        title="The rest of the library."
+        excludeSlug={resource.slug}
+      />
 
       <LandingFinalCTA
         title="Find your highest-ROI automation."

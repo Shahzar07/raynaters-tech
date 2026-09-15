@@ -4,6 +4,7 @@ const page: LandingPage = {
   slug: 'ai-receptionist-cost-uk',
   primaryKeyword: 'ai receptionist cost uk',
   utmCampaign: 'ai-receptionist-cost-uk',
+  areaServed: 'United Kingdom',
   serviceType: 'AI Receptionist',
   navLabel: 'AI Receptionist Cost',
   navBlurb: 'What an AI receptionist really costs in the UK.',

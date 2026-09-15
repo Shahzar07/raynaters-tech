@@ -4,6 +4,7 @@ const page: LandingPage = {
   slug: 'ai-automation-for-law-firms-uk',
   primaryKeyword: 'ai automation for law firms uk',
   utmCampaign: 'ai-automation-for-law-firms-uk',
+  areaServed: 'United Kingdom',
   serviceType: 'AI Automation',
   navLabel: 'AI Automation for Law Firms',
   navBlurb: 'Automate intake, scheduling and chasing — bill more hours.',

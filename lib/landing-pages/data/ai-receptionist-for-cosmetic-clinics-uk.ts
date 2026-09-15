@@ -4,6 +4,7 @@ const page: LandingPage = {
   slug: 'ai-receptionist-for-cosmetic-clinics-uk',
   primaryKeyword: 'ai receptionist for cosmetic clinics uk',
   utmCampaign: 'ai-receptionist-for-cosmetic-clinics-uk',
+  areaServed: 'United Kingdom',
   serviceType: 'AI Receptionist',
   navLabel: 'AI Receptionist for Cosmetic Clinics',
   navBlurb: 'Capture every aesthetic enquiry and fill your treatment book.',

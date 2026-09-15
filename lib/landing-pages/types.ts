@@ -87,6 +87,13 @@ export interface LandingPage {
   utmCampaign: string;
   serviceType: string;
 
+  /**
+   * Market this page is written for, for Service schema. Set it only when
+   * the page's primary keyword carries a country — otherwise the schema
+   * builder falls back to Worldwide, which is what the rest of the site is.
+   */
+  areaServed?: string;
+
   /** Short label for nav dropdown, footer, breadcrumb + homepage cards. */
   navLabel: string;
   /** One-line blurb for the nav dropdown + homepage "Who we build for" cards. */

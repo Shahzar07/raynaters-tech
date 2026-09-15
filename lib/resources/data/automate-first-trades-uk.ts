@@ -3,9 +3,9 @@ import type { Resource } from '@/lib/resources/types';
 const resource: Resource = {
   slug: 'automate-first-trades-uk',
   category: 'Playbook',
-  title: 'What to automate first in a UK trades or small service business',
+  title: 'What to automate first: which jobs are automatable in a trades business',
   excerpt:
-    'A practical order of operations for automating admin in a trades or service business — starting with the workflow that loses you money today.',
+    'Which jobs are actually automatable in a trades or service business, and the order to automate the process — starting with the workflow that loses you money today.',
   readingTime: '6 min',
   datePublished: '2026-02-10',
   dateModified: '2026-02-10',
@@ -16,7 +16,7 @@ const resource: Resource = {
   },
 
   directAnswer:
-    'For most UK trades and small service businesses, automate call answering and job booking first, because missed calls are direct lost revenue. After that, automate appointment reminders, quote follow-ups and review requests. Start with the workflow that loses you money today — not the one that is most technically exciting.',
+    'For most trades and small service businesses, automate call answering and job booking first, because missed calls are direct lost revenue. After that, automate the process behind appointment reminders, quote follow-ups and review requests. A business process is automatable when it repeats, follows rules you could write down, and does not need your judgement. Start with the workflow that loses you money today — not the one that is most technically exciting.',
 
   body: [
     {
@@ -25,11 +25,23 @@ const resource: Resource = {
     },
     {
       type: 'h2',
+      text: 'How to tell if a job is automatable',
+    },
+    {
+      type: 'p',
+      text: 'Before you automate the process, work out whether it should be automated at all. A manual process is automatable when three things are true: it repeats often enough to be worth the build, it follows rules you could write on an index card, and the expensive part is the time it consumes rather than the judgement it needs. Quoting a complex refurb is not automatable — deciding it needs a site visit is. Chasing the customer who has not replied to that quote in five days is about as automatable as work gets.',
+    },
+    {
+      type: 'p',
+      text: 'The old answer to this was robotic process automation (RPA) — software replaying the same clicks in the same order. It works right up until a supplier changes an invoice layout. Modern automation technologies handle the messy middle instead: reading intent, coping with a missing field, escalating the genuinely odd one to you. That widens the range of automation opportunities considerably, because a process no longer has to be perfectly tidy to be worth automating — it only has to be repetitive and time consuming.',
+    },
+    {
+      type: 'h2',
       text: 'The rule: automate what loses you money first',
     },
     {
       type: 'p',
-      text: 'Every automation falls into one of two buckets: it either recovers revenue you are losing, or it saves you time. Revenue beats time, every time. A reminder system that saves you ten minutes a day is nice. A receptionist that recovers a £2,000 job you would have missed is transformational. Rank your options by money at stake, not by how clever they are.',
+      text: 'Every automation falls into one of two buckets: it either recovers revenue you are losing, or it saves you time. Revenue beats time, every time. A reminder system that saves you ten minutes a day is nice. A receptionist that recovers a four-figure job you would have missed is transformational. Rank your options by money at stake, not by how clever they are.',
     },
     {
       type: 'h2',
@@ -127,12 +139,15 @@ const resource: Resource = {
   related: [
     { label: 'See our AI receptionist for UK trades', href: '/ai-receptionist-for-trades-uk' },
     { label: 'What does an AI automation agency do?', href: '/ai-automation-agency-uk' },
+    { label: 'n8n vs Make vs Zapier: what automates business processes', href: '/resources/n8n-vs-make-vs-zapier-service-business' },
+    { label: 'The best AI receptionist in 2026, every option compared', href: '/resources/best-ai-receptionist-compared-2026' },
+    { label: 'Book a free Agent Audit', href: '/book' },
   ],
 
   metadata: {
-    title: 'What to Automate First in a UK Trades Business',
+    title: 'What to Automate First: Which Jobs Are Automatable in a Trades Business',
     description:
-      'A practical playbook for UK trades and small service businesses: what to automate first, in order, starting with the work that loses you money.',
+      'Which jobs are automatable in a trades or service business, and the order to automate the process — starting with the work that loses you money today.',
   },
 };
 

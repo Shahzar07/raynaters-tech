@@ -13,6 +13,7 @@ import { AuthorityStrip } from './AuthorityStrip';
 import { MiniCaseStory } from './MiniCaseStory';
 import { LandingFAQ } from './LandingFAQ';
 import { LandingFinalCTA } from './LandingFinalCTA';
+import { KeepReading } from '@/components/ui/KeepReading';
 import type { LandingPage } from '@/lib/landing-pages/types';
 
 export function VerticalLandingPage({ data }: { data: LandingPage }) {
@@ -55,6 +56,8 @@ export function VerticalLandingPage({ data }: { data: LandingPage }) {
       <MiniCaseStory data={data.miniCase} />
 
       <LandingFAQ faqs={data.faqs} />
+
+      <KeepReading />
 
       <LandingFinalCTA
         title="Let an agent do the work you keep doing yourself."

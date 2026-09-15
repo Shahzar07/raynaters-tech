@@ -16,7 +16,7 @@ import { CASE_STUDIES } from '@/lib/case-studies';
 export const metadata: Metadata = pageMetadata({
   title: 'Case Studies | Raynaters Tech',
   description:
-    'Real UK AI agent deployments and the results they delivered — recovered revenue, reclaimed hours and booked work across trades, clinics and law firms.',
+    'Real AI agent deployments and the results they delivered — recovered revenue, reclaimed hours and booked work across trades, clinics and law firms.',
   path: '/case-studies',
 });
 
@@ -40,12 +40,12 @@ export default function CaseStudiesPage() {
             </Reveal>
             <Reveal delay={0.05}>
               <h1 className="mt-5 font-extrabold uppercase text-balance text-[37px] leading-[1.06] tracking-tightest text-text-primary min-[400px]:text-[44px] sm:text-[50px] md:text-[62px] md:leading-[1.02]">
-                Real UK deployments. Real recovered revenue.
+                Real deployments. Real recovered revenue.
               </h1>
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-6 max-w-[58ch] text-pretty text-[17px] leading-relaxed text-text-secondary sm:text-[19px]">
-                A selection of agents we&apos;ve deployed across UK service businesses — what
+                A selection of agents we&apos;ve deployed across service businesses — what
                 they were losing, what we built, and the result it delivered.
               </p>
             </Reveal>

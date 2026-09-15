@@ -3,7 +3,7 @@
 // Edit copy without touching JSX.
 //
 // Positioning (per the Nov 2026 funnel audit):
-//   ONE market  — Australia first.
+//   ONE market  — established service businesses, wherever they are.
 //   ONE offer   — the free 30-minute Agent Audit.
 //   ONE promise — it pays for itself in 90 days or we keep building.
 //   TWO tracks  — front desk (lost enquiries) / back office (lost hours).
@@ -110,7 +110,7 @@ export const CONTENT = {
   automate: {
     eyebrow: 'What we build',
     title: 'If the work repeats, it can probably be automated.',
-    sub: 'Every business we work with loses money in one of two places. Find yours — that is where we start.',
+    sub: 'Every business we work with loses money in one of two places: the sales process out front, or the admin out back. Find yours — that is where we start.',
     tracks: [
       {
         key: 'front',
@@ -156,7 +156,7 @@ export const CONTENT = {
     sub: 'We’d rather you close the tab now than waste 30 minutes on a call that was never going to work. Be honest with yourself here.',
     forTitle: 'This is for you if',
     forItems: [
-      'You run an established Australian business doing real revenue — not a pre-launch idea.',
+      'You run an established business doing real revenue — not a pre-launch idea.',
       'You have 3–200 staff and at least one person whose week is mostly repetitive work.',
       'You can point at a specific workflow that eats hours: enquiries, follow-up, support, reporting, admin.',
       'You want the automation measured in dollars and hours — not in “AI transformation”.',
@@ -195,7 +195,7 @@ export const CONTENT = {
   proof: {
     eyebrow: 'The receipts',
     title: 'What’s already running.',
-    sub: 'Live deployments across Australia, the UK, US and EU. Client names redacted; the hours are real and available on request.',
+    sub: 'Live deployments across four markets and every time zone we work in. Client names redacted; the hours are real and available on request.',
     headline: [
       { value: '47,283+', label: 'operational hours reclaimed', note: 'Measured Mar 2025 → May 2026' },
       { value: '23+', label: 'AI systems live in production', note: 'Across 4 markets' },
@@ -487,7 +487,7 @@ export const CONTENT = {
       },
       {
         q: 'Is my data safe? Where does it live?',
-        a: 'Every deployment runs on infrastructure you own and control. We never hold your data. Builds are SOC2-aligned by default, and we work to Australian Privacy Principles for Australian clients.',
+        a: 'Every deployment runs on infrastructure you own and control. We never hold your data. Builds are SOC2-aligned by default, and we build to whichever privacy regime applies where you are — GDPR, the Australian Privacy Principles, or your local equivalent.',
       },
       {
         q: 'Do I need a technical team to run this afterwards?',
@@ -498,8 +498,24 @@ export const CONTENT = {
         a: 'A freelancer ships one workflow and disappears. We deploy a measured system, instrument it so you can prove the return, and put the 90-day ROI promise in the contract. If the number doesn’t land, that becomes our problem, not yours.',
       },
       {
-        q: 'Do you only work with Australian businesses?',
-        a: 'Australia is our primary market and where new capacity goes first. We also have live deployments across the UK, US, EU and UAE, and we work async across time zones.',
+        q: 'What counts as an AI business solution — and which one do I start with?',
+        a: 'An AI business solution is any system that takes a repeatable business process off a human and runs it end to end. In practice that means three buckets: AI sales tools at the front, support agents in the middle, back-office agents behind. You start with whichever one is bleeding the most money — not the one that demos best. We rank them by money at stake on the audit call, then automate business processes in that order. One at a time, measured, so you can see the number move before we build the next one.',
+      },
+      {
+        q: 'Do you replace our sales team, or give them AI sales tools?',
+        a: 'Give them tools. Nobody good quits because a robot booked their meetings. The AI-enabled layer handles the part your reps hate and do worst: answering inside 60 seconds, chasing the eleventh follow-up, logging every call, keeping the pipeline honest. Your people keep the part they are actually paid for — the conversation where money changes hands. Sales teams that run this do not get smaller. They stop losing deals to whoever picked up the phone first.',
+      },
+      {
+        q: 'How do you actually go about automating our sales process?',
+        a: 'We follow the money backwards. Every lead that came in, every one that went quiet, every deal that stalled — we map where they leaked out, then start automating sales process steps in the order they cost you most. Then we automate that leak: instant response on new enquiries, a follow-up sequence that does not forget, lead management and CRM updates handled without a human touching a keyboard, and a sales pipeline view built from what actually happened rather than what someone remembered to type. The manual tasks go. The customer relationships stay yours. Closing deals is still a human job.',
+      },
+      {
+        q: 'Is this an AI sales platform we log into, or something else?',
+        a: 'Something else — and this is the part most people get wrong. An AI sales platform is software you rent, log into, and still have to run. We build AI agents that live inside the stack you already own: your phone number, your CRM, your inbox. No new dashboard to check, no seat licences, no paid plans that scale with headcount. You own the infrastructure it runs on. If you ever fire us, the system keeps working.',
+      },
+      {
+        q: 'Which countries do you work with?',
+        a: 'All of them, in practice. We have live deployments across Australia, the UK, US, EU and UAE, and we work async across time zones. The systems we build run on software that does not care where you are — the only things that change market to market are the privacy regime we build to and the hours we overlap. If you can hand over logins and take a call, geography has never been the blocker.',
       },
     ],
   },
@@ -518,7 +534,7 @@ export const CONTENT = {
 
   footer: {
     tagline: 'Find the work. Automate it. Prove the money.',
-    blurb: 'Raynaters Tech builds AI systems for Australian businesses that turn repetitive work into measured hours and dollars back.',
+    blurb: 'Raynaters Tech builds AI systems for established businesses that turn repetitive work into measured hours and dollars back.',
     columns: [
       {
         label: 'Company',
@@ -547,7 +563,7 @@ export const CONTENT = {
       },
     ],
     copyright: '© 2026 Raynaters Tech Inc. All rights reserved.',
-    locale: 'Serving Australia · UK · US · EU',
+    locale: 'Working with clients worldwide · Async across time zones',
   },
 } as const;
 
