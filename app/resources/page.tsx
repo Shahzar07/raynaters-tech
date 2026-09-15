@@ -15,7 +15,7 @@ import { RESOURCES } from '@/lib/resources';
 export const metadata: Metadata = pageMetadata({
   title: 'Resources | Raynaters Tech',
   description:
-    'Honest, practical guides on AI automation and AI receptionists for UK businesses — what to automate first, what actually works, and how to get a return.',
+    'Honest, practical guides on AI automation, AI receptionists and what automates business processes — what to automate first, what actually works, and how to get a return.',
   path: '/resources',
 });
 

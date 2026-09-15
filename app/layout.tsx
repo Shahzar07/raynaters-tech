@@ -48,7 +48,6 @@ export const metadata: Metadata = {
       'AI sales tools, AI-enabled support and back-office agents. 47,283+ hours reclaimed, 23 systems live, under 90 days to ROI.',
     url: SITE_URL,
     siteName: SITE_NAME,
-    locale: 'en_AU',
     type: 'website',
     images: [{ url: 'https://d8j0ntlcm91z4.cloudfront.net/user_31J28LgsUCQmK5Ux97L8IuICZIM/hf_20260604_155053_5eceb174-bd85-4e5b-8715-10d0673aacf4.png', width: 2752, height: 1536, alt: 'Raynaters Tech — AI systems that pay for themselves in 90 days' }],
   },
@@ -75,7 +74,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en-AU"
+      lang="en"
       className={`${jakarta.variable} ${boldonse.variable}`}
     >
       {/* Google Tag Manager — inlined at the top of <head> by `beforeInteractive` */}

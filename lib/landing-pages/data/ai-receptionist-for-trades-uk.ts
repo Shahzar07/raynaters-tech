@@ -4,6 +4,7 @@ const page: LandingPage = {
   slug: 'ai-receptionist-for-trades-uk',
   primaryKeyword: 'ai receptionist for tradesmen',
   utmCampaign: 'ai-receptionist-for-trades-uk',
+  areaServed: 'United Kingdom',
   serviceType: 'AI Receptionist',
   navLabel: 'AI Receptionist for Trades',
   navBlurb: 'Answer every call and book every job — even on the tools.',

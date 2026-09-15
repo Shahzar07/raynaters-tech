@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 const formatMillions = (n: number) => `$${(n / 1_000_000).toFixed(1)}M+`;
 
 const STATS = [
-  { to: 47000, suffix: '+', label: 'Operational hours reclaimed', sub: 'Across UK, US & EU deployments' },
+  { to: 47000, suffix: '+', label: 'Operational hours reclaimed', sub: 'Across every market we operate in' },
   { to: 2_400_000, format: formatMillions, label: 'In operational cost cut', sub: 'Across Raynaters deployments to date' },
   { to: 23, label: 'Active deployments', sub: 'v3 framework · 14 months of refinement' },
 ] as const;

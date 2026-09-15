@@ -33,13 +33,13 @@ export function organizationSchema(): WithContext<Organization> {
     url: SITE_URL,
     logo: absUrl('/raynaters-mark.png'),
     description:
-      'AI automation agency building AI systems for Australian businesses that pay for themselves within 90 days — or we keep building until they do. Also active across the UK, US and EU.',
+      'AI automation agency building AI systems that pay for themselves within 90 days — or we keep building until they do. Live deployments across Australia, the UK, US, EU and UAE.',
     founder: {
       '@type': 'Person',
       name: 'Shahzar',
       // TODO(shahzar): add founder LinkedIn profile URL
     },
-    areaServed: ['AU', 'GB', 'US', 'EU'],
+    areaServed: ['AU', 'GB', 'US', 'EU', 'AE'],
     sameAs: [
       'https://www.linkedin.com/in/raynaters-tech-inc-7830a0383/',
       'https://www.trustpilot.com/review/raynaters.tech',
@@ -49,7 +49,7 @@ export function organizationSchema(): WithContext<Organization> {
       '@type': 'ContactPoint',
       contactType: 'customer support',
       email: 'team@raynaters.tech',
-      areaServed: ['AU', 'GB', 'US', 'EU'],
+      areaServed: ['AU', 'GB', 'US', 'EU', 'AE'],
       availableLanguage: 'en',
     },
   };
@@ -80,7 +80,7 @@ export function serviceSchema(input: {
     description: input.description,
     serviceType: input.serviceType,
     url: input.url,
-    areaServed: input.areaServed ?? 'United Kingdom',
+    areaServed: input.areaServed ?? 'Worldwide',
     provider: orgRef,
   };
 }

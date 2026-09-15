@@ -4,6 +4,7 @@ const page: LandingPage = {
   slug: 'ai-receptionist-for-clinics-uk',
   primaryKeyword: 'ai receptionist for dental clinics uk',
   utmCampaign: 'ai-receptionist-for-clinics-uk',
+  areaServed: 'United Kingdom',
   serviceType: 'AI Receptionist',
   navLabel: 'AI Receptionist for Clinics',
   navBlurb: 'Answer every patient call and fill every appointment slot.',

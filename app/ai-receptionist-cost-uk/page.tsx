@@ -21,6 +21,7 @@ export default function Page() {
             description: data.metadata.description,
             url: absUrl(`/${data.slug}`),
             serviceType: data.serviceType,
+            areaServed: data.areaServed,
           }),
           faqPageSchema(data.faqs),
           breadcrumbSchema([

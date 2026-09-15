@@ -4,6 +4,7 @@ const page: LandingPage = {
   slug: 'ai-automation-agency-uk',
   primaryKeyword: 'ai automation agency uk',
   utmCampaign: 'ai-automation-agency-uk',
+  areaServed: 'United Kingdom',
   serviceType: 'AI Automation',
   navLabel: 'AI Automation Agency',
   navBlurb: 'Done-for-you AI agents that pay for themselves in 90 days.',

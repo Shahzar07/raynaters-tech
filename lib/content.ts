@@ -3,7 +3,7 @@
 // Edit copy without touching JSX.
 //
 // Positioning (per the Nov 2026 funnel audit):
-//   ONE market  — Australia first.
+//   ONE market  — established service businesses, wherever they are.
 //   ONE offer   — the free 30-minute Agent Audit.
 //   ONE promise — it pays for itself in 90 days or we keep building.
 //   TWO tracks  — front desk (lost enquiries) / back office (lost hours).
@@ -156,7 +156,7 @@ export const CONTENT = {
     sub: 'We’d rather you close the tab now than waste 30 minutes on a call that was never going to work. Be honest with yourself here.',
     forTitle: 'This is for you if',
     forItems: [
-      'You run an established Australian business doing real revenue — not a pre-launch idea.',
+      'You run an established business doing real revenue — not a pre-launch idea.',
       'You have 3–200 staff and at least one person whose week is mostly repetitive work.',
       'You can point at a specific workflow that eats hours: enquiries, follow-up, support, reporting, admin.',
       'You want the automation measured in dollars and hours — not in “AI transformation”.',
@@ -195,7 +195,7 @@ export const CONTENT = {
   proof: {
     eyebrow: 'The receipts',
     title: 'What’s already running.',
-    sub: 'Live deployments across Australia, the UK, US and EU. Client names redacted; the hours are real and available on request.',
+    sub: 'Live deployments across four markets and every time zone we work in. Client names redacted; the hours are real and available on request.',
     headline: [
       { value: '47,283+', label: 'operational hours reclaimed', note: 'Measured Mar 2025 → May 2026' },
       { value: '23+', label: 'AI systems live in production', note: 'Across 4 markets' },
@@ -487,7 +487,7 @@ export const CONTENT = {
       },
       {
         q: 'Is my data safe? Where does it live?',
-        a: 'Every deployment runs on infrastructure you own and control. We never hold your data. Builds are SOC2-aligned by default, and we work to Australian Privacy Principles for Australian clients.',
+        a: 'Every deployment runs on infrastructure you own and control. We never hold your data. Builds are SOC2-aligned by default, and we build to whichever privacy regime applies where you are — GDPR, the Australian Privacy Principles, or your local equivalent.',
       },
       {
         q: 'Do I need a technical team to run this afterwards?',
@@ -514,8 +514,8 @@ export const CONTENT = {
         a: 'Something else — and this is the part most people get wrong. An AI sales platform is software you rent, log into, and still have to run. We build AI agents that live inside the stack you already own: your phone number, your CRM, your inbox. No new dashboard to check, no seat licences, no paid plans that scale with headcount. You own the infrastructure it runs on. If you ever fire us, the system keeps working.',
       },
       {
-        q: 'Do you only work with Australian businesses?',
-        a: 'Australia is our primary market and where new capacity goes first. We also have live deployments across the UK, US, EU and UAE, and we work async across time zones.',
+        q: 'Which countries do you work with?',
+        a: 'All of them, in practice. We have live deployments across Australia, the UK, US, EU and UAE, and we work async across time zones. The systems we build run on software that does not care where you are — the only things that change market to market are the privacy regime we build to and the hours we overlap. If you can hand over logins and take a call, geography has never been the blocker.',
       },
     ],
   },
@@ -534,7 +534,7 @@ export const CONTENT = {
 
   footer: {
     tagline: 'Find the work. Automate it. Prove the money.',
-    blurb: 'Raynaters Tech builds AI systems for Australian businesses that turn repetitive work into measured hours and dollars back.',
+    blurb: 'Raynaters Tech builds AI systems for established businesses that turn repetitive work into measured hours and dollars back.',
     columns: [
       {
         label: 'Company',
@@ -563,7 +563,7 @@ export const CONTENT = {
       },
     ],
     copyright: '© 2026 Raynaters Tech Inc. All rights reserved.',
-    locale: 'Serving Australia · UK · US · EU',
+    locale: 'Working with clients worldwide · Async across time zones',
   },
 } as const;
 

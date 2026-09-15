@@ -3,7 +3,7 @@ import type { Resource } from '@/lib/resources/types';
 const resource: Resource = {
   slug: 'automate-first-trades-uk',
   category: 'Playbook',
-  title: 'What to automate first: which jobs are automatable in a UK trades business',
+  title: 'What to automate first: which jobs are automatable in a trades business',
   excerpt:
     'Which jobs are actually automatable in a trades or service business, and the order to automate the process — starting with the workflow that loses you money today.',
   readingTime: '6 min',
@@ -16,7 +16,7 @@ const resource: Resource = {
   },
 
   directAnswer:
-    'For most UK trades and small service businesses, automate call answering and job booking first, because missed calls are direct lost revenue. After that, automate the process behind appointment reminders, quote follow-ups and review requests. A business process is automatable when it repeats, follows rules you could write down, and does not need your judgement. Start with the workflow that loses you money today — not the one that is most technically exciting.',
+    'For most trades and small service businesses, automate call answering and job booking first, because missed calls are direct lost revenue. After that, automate the process behind appointment reminders, quote follow-ups and review requests. A business process is automatable when it repeats, follows rules you could write down, and does not need your judgement. Start with the workflow that loses you money today — not the one that is most technically exciting.',
 
   body: [
     {
@@ -41,7 +41,7 @@ const resource: Resource = {
     },
     {
       type: 'p',
-      text: 'Every automation falls into one of two buckets: it either recovers revenue you are losing, or it saves you time. Revenue beats time, every time. A reminder system that saves you ten minutes a day is nice. A receptionist that recovers a £2,000 job you would have missed is transformational. Rank your options by money at stake, not by how clever they are.',
+      text: 'Every automation falls into one of two buckets: it either recovers revenue you are losing, or it saves you time. Revenue beats time, every time. A reminder system that saves you ten minutes a day is nice. A receptionist that recovers a four-figure job you would have missed is transformational. Rank your options by money at stake, not by how clever they are.',
     },
     {
       type: 'h2',
@@ -139,12 +139,15 @@ const resource: Resource = {
   related: [
     { label: 'See our AI receptionist for UK trades', href: '/ai-receptionist-for-trades-uk' },
     { label: 'What does an AI automation agency do?', href: '/ai-automation-agency-uk' },
+    { label: 'n8n vs Make vs Zapier: what automates business processes', href: '/resources/n8n-vs-make-vs-zapier-service-business' },
+    { label: 'The best AI receptionist in 2026, every option compared', href: '/resources/best-ai-receptionist-compared-2026' },
+    { label: 'Book a free Agent Audit', href: '/book' },
   ],
 
   metadata: {
-    title: 'What to Automate First: Which Jobs Are Automatable in UK Trades',
+    title: 'What to Automate First: Which Jobs Are Automatable in a Trades Business',
     description:
-      'Which jobs are automatable in a UK trades or service business, and the order to automate the process — starting with the work that loses you money today.',
+      'Which jobs are automatable in a trades or service business, and the order to automate the process — starting with the work that loses you money today.',
   },
 };
 
