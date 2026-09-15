@@ -36,16 +36,16 @@ const boldonse = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'AI Automation for Australian Businesses | Raynaters Tech',
+    default: 'AI Business Solutions & AI Sales Tools | Raynaters Tech',
     template: '%s | Raynaters Tech',
   },
   description:
-    'We find the repetitive work costing your business time and money, then build an AI system that handles it — paying for itself within 90 days or we keep building free. Free 30-minute Agent Audit.',
+    'AI business solutions that automate business processes — sales, support and back office. AI-enabled agents that pay for themselves in 90 days. Free Agent Audit.',
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'AI Automation for Australian Businesses | Raynaters Tech',
+    title: 'AI Business Solutions That Automate Business Processes | Raynaters Tech',
     description:
-      'Find what your business can automate in 30 minutes. 47,283+ hours reclaimed, 23 systems live, under 90 days to ROI.',
+      'AI sales tools, AI-enabled support and back-office agents. 47,283+ hours reclaimed, 23 systems live, under 90 days to ROI.',
     url: SITE_URL,
     siteName: SITE_NAME,
     locale: 'en_AU',
@@ -54,9 +54,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Automation for Australian Businesses | Raynaters Tech',
+    title: 'AI Business Solutions That Automate Business Processes | Raynaters Tech',
     description:
-      'Find what your business can automate in 30 minutes. Free Agent Audit, written ROI projection in 48 hours.',
+      'Automating your sales process, support and admin with AI agents. Free Agent Audit, written ROI projection in 48 hours.',
     images: ['https://d8j0ntlcm91z4.cloudfront.net/user_31J28LgsUCQmK5Ux97L8IuICZIM/hf_20260604_155053_5eceb174-bd85-4e5b-8715-10d0673aacf4.png'],
   },
   robots: { index: true, follow: true },

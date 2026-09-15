@@ -56,11 +56,11 @@ const page: LandingPage = {
   },
 
   eyebrow: 'AI Automation Agency · UK · US · EU',
-  h1: 'The AI automation agency UK businesses hire to stop doing work by hand.',
+  h1: 'AI automation services from the agency UK businesses hire to stop doing work by hand.',
   hook: 'We deploy AI agents that take repetitive admin, operations and customer workflows off your team — and pay for themselves within 90 days, or we keep building until they do.',
 
   directAnswer:
-    'An AI automation agency designs, builds and deploys AI agents that run your repetitive business workflows end to end — answering calls, qualifying leads, processing orders and updating your systems. Raynaters Tech deploys these agents for UK service businesses and guarantees they pay for themselves within 90 days, or we keep building until they do.',
+    'An AI automation agency designs, builds and deploys AI automation services — agentic automation that runs your repetitive business processes end to end, answering calls, qualifying leads, processing orders and updating your systems. Unlike traditional RPA, which follows fixed rules, these agents reason about the task. Raynaters Tech deploys them for UK service businesses and guarantees they pay for themselves within 90 days, or we keep building until they do.',
 
   headings: {
     whatItDoes: 'What an AI automation agency actually builds for you.',
@@ -84,6 +84,14 @@ const page: LandingPage = {
     {
       title: 'Reporting & operations visibility',
       body: 'Daily numbers, pipeline health and SLA breaches surfaced automatically — so you stop building spreadsheets and start reading them.',
+    },
+    {
+      title: 'Agentic automation, not brittle RPA',
+      body: 'Classic robotic process automation breaks the moment a screen moves. Agentic automation reasons about the task instead of replaying clicks, so it handles the messy middle — odd phrasing, missing fields, exceptions — and escalates with a human in the loop when the call is genuinely yours to make.',
+    },
+    {
+      title: 'IT & workflow automation across legacy systems',
+      body: 'IT automation services for the tools that were never meant to talk to each other. We wire an automation platform across legacy systems, modern SaaS and internal databases, so records sync in real time instead of via a Tuesday morning CSV. AI-driven where judgement is needed, deterministic where it is not.',
     },
   ],
 
@@ -172,15 +180,27 @@ const page: LandingPage = {
       a: 'Yes. Agents are built to live inside the stack you already run — your phone number, CRM, inbox, spreadsheets and internal tools — rather than forcing you to rip and replace. Integration is part of the build.',
     },
     {
+      q: 'What is agentic automation, and how is it different from RPA?',
+      a: 'Traditional RPA automates the clicks: it replays a fixed sequence across a screen, and it breaks the day someone moves a button or a supplier changes an invoice layout. Agentic automation gives the system a goal and the judgement to reach it — reading intent, handling exceptions, deciding when something needs a person. In practice we use both: deterministic automation where the rules never change, intelligent automation with a human in the loop where they do. Most workflows need a bit of each.',
+    },
+    {
+      q: 'Do you provide IT automation services as well as customer-facing agents?',
+      a: 'Yes. A lot of the work is unglamorous infrastructure automation — moving data between legacy systems and modern SaaS, syncing records in real time, retiring the CSV export someone rebuilds every Monday. We are tool-agnostic about the automation platform underneath; what matters is that the workflow runs without a human babysitting it, and that you can see it running.',
+    },
+    {
+      q: 'Can AI automation help with marketing as well as operations?',
+      a: 'It can, and for AI marketing the UK market is well past the experiment stage. The useful version is not a content generator — it is an agent that reads what your own data says is converting, builds campaigns and follow-up around that, and reports on which channels produced booked jobs rather than impressions. Machine learning is doing the ranking; your marketing strategies stay yours.',
+    },
+    {
       q: 'Is our data secure?',
       a: 'Agents operate within your existing systems and permissions, and we scope data access to only what each workflow needs. We are happy to walk through data handling, retention and access controls during the audit.',
     },
   ],
 
   metadata: {
-    title: 'AI Automation Agency UK | Raynaters Tech',
+    title: 'AI Automation Agency UK | AI Automation Services | Raynaters Tech',
     description:
-      'UK AI automation agency deploying AI agents that pay for themselves in 90 days — or we keep building. 47,000+ hours reclaimed. Book a free Agent Audit.',
+      'UK AI automation services: agentic automation, IT automation and RPA that pay for themselves in 90 days — or we keep building. 47,000+ hours reclaimed. Free Agent Audit.',
   },
 };
 

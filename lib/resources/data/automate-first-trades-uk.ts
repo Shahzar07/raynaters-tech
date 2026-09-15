@@ -3,9 +3,9 @@ import type { Resource } from '@/lib/resources/types';
 const resource: Resource = {
   slug: 'automate-first-trades-uk',
   category: 'Playbook',
-  title: 'What to automate first in a UK trades or small service business',
+  title: 'What to automate first: which jobs are automatable in a UK trades business',
   excerpt:
-    'A practical order of operations for automating admin in a trades or service business — starting with the workflow that loses you money today.',
+    'Which jobs are actually automatable in a trades or service business, and the order to automate the process — starting with the workflow that loses you money today.',
   readingTime: '6 min',
   datePublished: '2026-02-10',
   dateModified: '2026-02-10',
@@ -16,12 +16,24 @@ const resource: Resource = {
   },
 
   directAnswer:
-    'For most UK trades and small service businesses, automate call answering and job booking first, because missed calls are direct lost revenue. After that, automate appointment reminders, quote follow-ups and review requests. Start with the workflow that loses you money today — not the one that is most technically exciting.',
+    'For most UK trades and small service businesses, automate call answering and job booking first, because missed calls are direct lost revenue. After that, automate the process behind appointment reminders, quote follow-ups and review requests. A business process is automatable when it repeats, follows rules you could write down, and does not need your judgement. Start with the workflow that loses you money today — not the one that is most technically exciting.',
 
   body: [
     {
       type: 'p',
       text: 'When you decide to automate, the temptation is to start with the shiny stuff — a chatbot on the website, a fancy dashboard. The businesses that get real returns do the opposite. They start with the boring workflow that is quietly costing them money every week, fix that, and only then move on. Here is the order that works.',
+    },
+    {
+      type: 'h2',
+      text: 'How to tell if a job is automatable',
+    },
+    {
+      type: 'p',
+      text: 'Before you automate the process, work out whether it should be automated at all. A manual process is automatable when three things are true: it repeats often enough to be worth the build, it follows rules you could write on an index card, and the expensive part is the time it consumes rather than the judgement it needs. Quoting a complex refurb is not automatable — deciding it needs a site visit is. Chasing the customer who has not replied to that quote in five days is about as automatable as work gets.',
+    },
+    {
+      type: 'p',
+      text: 'The old answer to this was robotic process automation (RPA) — software replaying the same clicks in the same order. It works right up until a supplier changes an invoice layout. Modern automation technologies handle the messy middle instead: reading intent, coping with a missing field, escalating the genuinely odd one to you. That widens the range of automation opportunities considerably, because a process no longer has to be perfectly tidy to be worth automating — it only has to be repetitive and time consuming.',
     },
     {
       type: 'h2',
@@ -130,9 +142,9 @@ const resource: Resource = {
   ],
 
   metadata: {
-    title: 'What to Automate First in a UK Trades Business',
+    title: 'What to Automate First: Which Jobs Are Automatable in UK Trades',
     description:
-      'A practical playbook for UK trades and small service businesses: what to automate first, in order, starting with the work that loses you money.',
+      'Which jobs are automatable in a UK trades or service business, and the order to automate the process — starting with the work that loses you money today.',
   },
 };
 
