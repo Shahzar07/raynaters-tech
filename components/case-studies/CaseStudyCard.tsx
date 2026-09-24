@@ -19,6 +19,11 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
             <span aria-hidden className="h-1.5 w-1.5 bg-accent" />
             {study.category}
           </span>
+          {study.modeled && (
+            <span className="absolute right-4 top-4 bg-accent px-2.5 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.14em] text-ink">
+              Modeled
+            </span>
+          )}
         </div>
 
         <div className="flex flex-1 flex-col p-6 sm:p-7">
