@@ -70,7 +70,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
               {study.modeled ? 'Modeled' : 'Note'}
             </span>
             {study.modeled
-              ? `Modeled scenario, not a named client. ${study.modeled.basis} Every assumption is listed at the bottom of this page.`
+              ? `Illustrative case study. ${study.client} is a composite business, not a real client. ${study.modeled.basis} Every assumption is listed at the bottom of this page.`
               : 'This is a representative case study illustrating the type of results our deployments deliver. Metrics are indicative of typical outcomes. Client details will be updated with verified data as engagements are confirmed.'}
           </p>
         </Container>
