@@ -1,8 +1,8 @@
 import type { CaseStudy } from './types';
-import { GTA_RENOVATION_STUDIES } from './gta-renovation';
+import { RENOVATION_STUDIES } from './renovation';
 
 export const CASE_STUDIES: CaseStudy[] = [
-  ...GTA_RENOVATION_STUDIES,
+  ...RENOVATION_STUDIES,
   {
     slug: 'northgate-plumbing-heating',
     client: 'Northgate Plumbing & Heating',

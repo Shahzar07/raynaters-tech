@@ -13,6 +13,9 @@ const nextConfig = {
   // (covers requests that never reach Next.js, e.g. bare http://raynaters.tech).
   async redirects() {
     return [
+      // Case studies relocated out of the GTA (Sep 2026).
+      { source: '/case-studies/home-renovation-quote-follow-up-vaughan', destination: '/case-studies/home-renovation-quote-follow-up-manchester', permanent: true },
+      { source: '/case-studies/kitchen-company-google-reviews-oakville', destination: '/case-studies/kitchen-company-google-reviews-melbourne', permanent: true },
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'raynaters.tech' }],

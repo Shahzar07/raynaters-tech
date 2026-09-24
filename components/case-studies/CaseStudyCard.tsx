@@ -15,15 +15,19 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
           />
-          <span className="absolute left-4 top-4 inline-flex items-center gap-2 bg-ink px-2.5 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.14em] text-text-on-ink">
-            <span aria-hidden className="h-1.5 w-1.5 bg-accent" />
-            {study.category}
-          </span>
-          {study.modeled && (
-            <span className="absolute right-4 top-4 bg-accent px-2.5 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.14em] text-ink">
-              Modeled
+          {/* One flowing row, so a long category wraps the Modeled chip
+              onto the next line instead of running underneath it. */}
+          <div className="absolute inset-x-4 top-4 flex flex-wrap items-start gap-2">
+            <span className="inline-flex items-center gap-2 bg-ink px-2.5 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.14em] text-text-on-ink">
+              <span aria-hidden className="h-1.5 w-1.5 bg-accent" />
+              {study.category}
             </span>
-          )}
+            {study.modeled && (
+              <span className="bg-accent px-2.5 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.14em] text-ink">
+                Modeled
+              </span>
+            )}
+          </div>
         </div>
 
         <div className="flex flex-1 flex-col p-6 sm:p-7">
